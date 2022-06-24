@@ -1,0 +1,21 @@
+#!/bin/bash
+
+### dependencies
+
+sudo apt-get install -y libparse-win32registry-perl
+
+### install / conf
+
+path=$(find /usr/share -name Win32Registry)
+cd /usr/share && sudo git clone https://github.com/keydet89/RegRipper3.0.git 
+sudo mv RegRipper3.0 regripper
+for file in WinNT/File.pm WinNT/Key.pm Base.pm; do sudo mv ${path}/${file} ${path}/${file}.$(date +%s); sudo ln -sv /usr/share/regripper/${file##*/} ${path}/${file}; done
+cd regripper
+sudo cp -a rip.pl rip.pl.$(date +%s)
+sudo sed -i '/^my @alerts = ();/a my \$plugindir = "/usr/share/regripper/plugins/";' rip.pl
+sudo sed -i "1c #! $(which perl)\nuse lib qw(/usr/lib/perl5/);" rip.pl
+sudo chmod +x rip.pl
+sudo ln -sv /usr/share/regripper/rip.pl /usr/bin/regripper
+sudo ln -sv /usr/share/regripper/rip.pl /usr/bin/rip
+
+regripper -h
