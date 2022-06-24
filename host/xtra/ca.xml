@@ -1,0 +1,19 @@
+<action>
+        <icon>go-down</icon>
+        <name>nbd mount</name>
+        <unique-id>1655620394868230-1</unique-id>
+        <command>pkexec nbd.sh mount %f</command>
+        <description>mount file to /vms/ndbX with nbd</description>
+        <patterns>*.qcow2;*.img;*.raw</patterns>
+        <other-files/>
+</action>
+<action>
+        <icon>go-up</icon>
+        <name>nbd umount</name>
+        <unique-id>1655622384229194-2</unique-id>
+        <command>pkexec nbd.sh umount %f</command>
+        <description>unmount file from /vms/ndbX with nbd</description>
+        <patterns>*.qcow2;*.img;*.raw</patterns>
+        <other-files/>
+</action>
+</actions>
