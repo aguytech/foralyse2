@@ -6,7 +6,17 @@
 sudo apt install -y whois
 
 #### pwd & evtx & process
-sudo apt install -y john libscca-utils pev radare2
+sudo apt install -y john libscca-utils pev
+
+# radare2 via snap
+#sudo snap install --edge --jailmode radare2
+# from github https://github.com/radareorg/radare2/releases
+file=radare2-dev_5.7.2_amd64.deb
+curl -L -o /tmp/${file} https://github.com/radareorg/radare2/releases/download/5.7.2/${file}
+sudo apt install -y /tmp/${file}
+
+# r2env via pip3
+python3 -m pip install -U r2env
 
 #### hive
 sudo apt install -y libhivex-bin chntpw reglookup
