@@ -7,13 +7,17 @@ python3 -m pip install -U pefile yara-python capstone pycryptodome jsonschema le
 python3 -m pip install -U volatility3
 cd ~/.local/bin && ln -sv vol vol3
 
+_echoy vol3
+vol3 -h
+_ask
+
 ### volatility2
 
 # https://github.com/volatilityfoundation/volatility/wiki/Installation
 
 ##### global
 
-sudo apt install -y pcregrep libpcre++-dev python-dev
+sudo apt install -y pcregrep libpcre++-dev python2-dev
 
 python2 -m pip install distorm3 ipython openpyxl pycrypto pytz ujson yara-python
 
@@ -28,8 +32,8 @@ mkdir build && cd build
 cmake -G"Unix Makefiles" ../
 sudo make install
 cd ../python
-sudo python setup.py install
-sudo ln -sv /usr/local/lib/libforensic1394.so.0.3.0 /usr/lib/libforensic1394.so.2
+sudo python2 setup.py install
+#sudo ln -sv /usr/local/lib/libforensic1394.so.0.3.0 /usr/lib/libforensic1394.so.2
 
 cd
 sudo rm -fR /tmp/libforensic1394
@@ -42,7 +46,7 @@ cd /opt
 sudo git clone https://github.com/volatilityfoundation/volatility.git
 cd volatility
 sudo rm -fR .git
-sudo python setup.py install
+sudo python2 setup.py install
 
 cd /usr/local/bin
 sudo ln -sv vol.py vol2
@@ -50,5 +54,3 @@ sudo ln -sv vol.py vol2
 _echoy vol2
 vol2 -h
 
-_echoy vol3
-vol3 -h
