@@ -18,8 +18,8 @@ _PATH_SHARE=${_ANSWER:-/share}
 ### sub
 
 _source share.sh
-[ -f ${_PATH_SCRIPT}/sub/perso.sh ]  && _source perso.sh
 _source global.sh
+[ -f ${_PATH_SCRIPT}/sub/perso.sh ]  && _source perso.sh
 _source forensic.sh
 _source autopsy.sh
 _source binwalk.sh
@@ -36,4 +36,4 @@ _source cfr.sh
 _source clean.sh
 
 _echoy "\n-----------------------------------------------"
-_echoyb "This installation is complete"
+_echoyb "This installation is complete \nRestart the guest"
