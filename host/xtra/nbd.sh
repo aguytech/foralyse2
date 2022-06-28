@@ -85,7 +85,7 @@ __init() {
 	[ "$#" -lt 2 ] && echo "Wrong parameters numbers: $#" && __usage
 }
 
-_PATH_NBD=/vms/nbd
+_PATH_NBD=
 
 __init $*
 
