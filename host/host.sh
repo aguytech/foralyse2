@@ -8,15 +8,22 @@ file=${_PATH_SCRIPT}/sub/inc.sh
 ! [ -f ${file} ] && echo "Unable to find file: ${file}" && exit 1
 ! . ${file} && echo -e "Errors encountered. \nSee log files in /var/lkog/foralyse" && exit 1
 
-### start
+### begin
 
 _echoyb "- Use from the HOST"
 
-_ask "Give the shared path from the Host (/vms/share): "
-_PATH_SHARE=${_ANSWER:-/vms/share}
+# user conf
+_FILE_CONF=${HOME}/.config/foralyse
+[ -f ${_FILE_CONF} ] || cp ${_PATH_SCRIPT}/conf/foralyse ${_FILE_CONF}
 
-_ask "Give the path to mount qcow2 files (/vms/nbd): "
-_PATH_NBD=${_ANSWER:-/vms/nbd}
+tmp=/vms/share
+_ask "Give the shared path from the Host (${tmp}): "
+_PATH_SHARE=${_ANSWER:-${tmp}}
+
+tmp=/vms/nbd
+_ask "Give the path to mount device files (${tmp}): "
+_PATH_NBD=${_ANSWER:-${tmp}}
+sed -i "/^_PATH_NBD=/ s|=.*$|${_PATH_NBD}|" ${_FILE_CONF}
 
 ### sub
 
