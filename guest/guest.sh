@@ -5,8 +5,8 @@ _PATH_SCRIPT=$( readlink -f ${0%/*} )
 ### functions
 
 file=${_PATH_SCRIPT}/sub/inc.sh
-! [ -f ${file} ] && echo "Unable to find file: ${file}" && exit 1
-! . ${file} && echo -e "Errors encountered. \nSee log files in /var/lkog/foralyse" && exit 1
+! [ -f ${file} ] && _exite "Unable to find file: ${file}"
+! . ${file} && _exite "Errors encountered. \nSee log files in /var/lkog/foralyse"
 
 ### begin
 

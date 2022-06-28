@@ -13,7 +13,7 @@ if [ -z "${file_soft}" ]; then
 	_echoyb "Download jdk v8 from Oracle website \nand put the file jdk-8*linux-x64.tar.gz in shared path: ${_PATH_SHARE}"
 	_ask
 	file_soft=$(ls ${_PATH_SHARE}/trans/jdk-8*linux-x64.tar.gz)
-	[ -z "${file_soft}" ] && echo "Unable to find file: ${file_soft}" &&  exit 1
+	[ -z "${file_soft}" ] && _exite "Unable to find file: ${file_soft}"
 fi
 
 file=/usr/local/bin/oracle-java-installer.sh
@@ -31,7 +31,7 @@ if [ -z "${file_soft}" ]; then
 	_echoyb "Download sleuthkit deb file from sleuthkit website \nand put the file sleuthkit-java_*_amd64.deb in shared path: ${_PATH_SHARE}"
 	_ask
 	file_soft=$(ls ${_PATH_SHARE}/trans/sleuthkit-java_*_amd64.deb)
-	[ -z "${file_soft}" ] && echo "Unable to find file: ${file_soft}" &&  exit 1
+	[ -z "${file_soft}" ] && _exite "Unable to find file: ${file_soft}"
 fi
 
 # get versions
@@ -46,7 +46,7 @@ if [ -z "${file_soft}" ]; then
 	_echoyb "Download autopsy for linux from autopsy website \nand put the file autopsy-*.zip in shared path: ${_PATH_SHARE}"
 	_ask
 	file_soft=$(ls ${_PATH_SHARE}/trans/autopsy-*.zip)
-	[ -z "${file_soft}" ] && echo "Unable to find file: ${file_soft}" &&  exit 1
+	[ -z "${file_soft}" ] && _exite "Unable to find file: ${file_soft}"
 fi
 
 _echoy unzip ${file_soft}

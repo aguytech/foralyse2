@@ -13,7 +13,7 @@ if [ -z "${file_soft}" ]; then
 	_echoyb "Download IDA free version from hex-rays.com \nand put the file idafree*_linux.run in shared path: ${_PATH_SHARE}"
 	_ask
 	file_soft=$( ls ${_PATH_SHARE}/trans/idafree*_linux.run )
-	[ -z "${file_soft}" ] && echo "Unable to find file: ${file_soft}" &&  exit 1
+	[ -z "${file_soft}" ] && _exite "Unable to find file: ${file_soft}"
 fi
 
 path=/opt/idafree

@@ -5,7 +5,7 @@
 [ -d "${_PATH_NBD}" ] || sudo mkdir -p "${_PATH_NBD}"
 file=${_PATH_SCRIPT}/xtra/nbd.sh
 fileto=/usr/local/bin/nbd.sh
-! [ -f ${file} ] && echo "Unable to find file: ${file}" && exit 1
+! [ -f ${file} ] && _exite "Unable to find file: ${file}"
 sudo cp ${file} ${fileto}
 sudo sed -i "/^_PATH_NBD=/ s|=.*$|=${_PATH_NBD}|" ${fileto}
 sudo chmod +x /usr/local/bin/nbd.sh
