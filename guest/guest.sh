@@ -21,21 +21,21 @@ if [ -z "${_PATH_SHARE}" ]; then
 	tmp=/foralyse/share
 	_ask "Give the shared path from the Guest (${tmp}): "
 	_PATH_SHARE=${_ANSWER:-${tmp}}
-	sed -i "/^_PATH_SHARE=/ s|=.*$|${_PATH_SHARE}|" ${_FILE_CONF}
+	sed -i "/^_PATH_SHARE=/ s|=.*$|=${_PATH_SHARE}|" ${_FILE_CONF}
 fi
 
 if [ -z "${_PATH_CASE}" ]; then
 	tmp=/foralyse/case
 	_ask "Give the path to mount case (${tmp}): "
 	_PATH_CASE=${_ANSWER:-${tmp}}
-	sed -i "/^_PATH_CASE=/ s|=.*$|${_PATH_CASE}|" ${_FILE_CONF}
+	sed -i "/^_PATH_CASE=/ s|=.*$|=${_PATH_CASE}|" ${_FILE_CONF}
 fi
 
 if [ -z "${_PATH_NBD}" ]; then
 	tmp=/foralyse/nbd
 	_ask "Give the path to mount dumped disk (${tmp}): "
 	_PATH_NBD=${_ANSWER:-${tmp}}
-	sed -i "/^_PATH_NBD=/ s|=.*$|${_PATH_NBD}|" ${_FILE_CONF}
+	sed -i "/^_PATH_NBD=/ s|=.*$|=${_PATH_NBD}|" ${_FILE_CONF}
 fi
 
 ### sub
