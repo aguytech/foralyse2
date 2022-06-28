@@ -44,7 +44,7 @@ __mount_dev() {
 	[ -z "${nbd_base}" ] && return
 
 	for nbd in $(ls -d1 ${nbd_base}* | grep -v "^${nbd_base}$" ); do
-		path="${path_base_nbd}/${nbd#/dev/}"
+		path="${_PATH_NBD}/${nbd#/dev/}"
 		[ -d "${path}" ] || mkdir -p ${path}
 		grep -q ${nbd} /proc/mounts && echo "${nbd} already mounted" && continue
 		mount ${nbd} ${path} && echo "${nbd} mounted"
@@ -56,7 +56,7 @@ __umount_dev() {
 	[ -z "${nbd_base}" ] && return
 
 	for nbd in $(ls -d1 ${nbd_base}* | grep -v "^${nbd_base}$" ); do
-		path="${path_base_nbd}/${nbd#/dev/}"
+		path="${_PATH_NBD}/${nbd#/dev/}"
 		if grep -q ${nbd} /proc/mounts && umount ${path}; then
 			echo "${nbd} unmounted"
 			rmdir ${path}
@@ -74,15 +74,18 @@ __init() {
 	# variables
 	script=${0##*/}
 	nbd_file=/tmp/${script}
-	path_base_nbd=/vms/nbd
 
-	# nbd_file
+	# nbd path
+	! [ -d "${_PATH_NBD}" ] && echo "Unable to find path: ${_PATH_NBD}" && exit 1
+	# nbd file
 	[ -f ${nbd_file} ] || touch ${nbd_file}
 	# root privileges
 	[ "${USER}" != root  ] && echo "Root privileges are needed" && __usage
 	# Wrong parameters numbers
 	[ "$#" -lt 2 ] && echo "Wrong parameters numbers: $#" && __usage
 }
+
+_PATH_NBD=/vms/nbd
 
 __init $*
 
@@ -100,7 +103,7 @@ case $1 in
 		__umount_nbd "$2"
 	;;
 	*)
-		echo "No good command given to ${script}"
+		echo "Wrong command given to ${script}"
 		__usage
 	;;
 esac
