@@ -57,7 +57,7 @@ qt5ct 2>/dev/null
 
 ### user
 
-paths="~/.local/share/icons ~/.local/share/applications"
+paths="${HOME}/.local/share/icons ${HOME}/.local/share/applications"
 for path in ${paths}; do
 	[ -d ${path} ] || mkdir -p ${path}
 done
