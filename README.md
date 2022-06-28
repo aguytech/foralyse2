@@ -28,9 +28,11 @@ The objectives of this project are to provide basic tools in forensic analysis i
 - Binary
     - balbuzard
     - binwalk
+    - bsdiff
     - pedis pehash peres pesec pescan readpe rva2ofs
     - r2env
     - radare2
+    - vbindiff
 
 - Hive
     - chntpw reged sampasswd
