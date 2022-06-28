@@ -2,6 +2,9 @@
 
 ### global
 
+#### binary
+sudo apt install -y vbindiff bsdiff
+
 #### network
 sudo apt install -y whois
 
