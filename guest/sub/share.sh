@@ -1,5 +1,7 @@
 #!/bin/bash
 
+###  SHARE
+
 file=/etc/initramfs-tools/modules
 grep -q ^9p ${file} || sudo sh -c "echo '
 # qemu share 
@@ -14,3 +16,12 @@ grep -q '^/hostshare' /etc/fstab || sudo sh -c 'echo "
 
 [ -d ${_PATH_SHARE} ] || sudo mkdir -p ${_PATH_SHARE}
 sudo mount /share
+
+###  CASE
+
+sudo cp ${path_perso}/xtra/*.sh /usr/local/bin/
+sudo cp ${path_perso}/xtra/mount-case.service /etc/systemd/system/
+sudo sed -i "s|_PATH_CASE|${_PATH_CASE}|g" /etc/systemd/system/mount-case.service
+sudo chmod 755 /usr/local/bin/*.sh
+sudo systemctl enable mount-case.service
+sudo systemctl start mount-case.service

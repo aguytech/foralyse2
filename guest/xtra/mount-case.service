@@ -1,0 +1,15 @@
+[Unit]
+Description=Mount _PATH_CASE
+After=systemd-remount-fs.service
+ 
+[Service]
+#Type=simple
+Type=oneshot
+RemainAfterExit=yes
+ 
+ExecStart=/usr/local/bin/mount.sh start _PATH_CASE
+ExecStop=/usr/local/bin/mount.sh stop _PATH_CASE
+ 
+[Install]
+WantedBy=multi-user.target
+
