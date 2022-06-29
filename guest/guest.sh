@@ -41,7 +41,7 @@ fi
 # share
 if grep -q "^/hostshare.*${_PATH_SHARE}" /etc/fstab \
 	&& [ -d "${_PATH_SHARE}" ] \
-	&& ! grep -q "^/hostshare*${_PATH_SHARE}" /proc/mounts
+	&& ! grep -q "^/hostshare.*${_PATH_SHARE}" /proc/mounts
 then sudo mount ${_PATH_SHARE}
 fi
 
@@ -50,7 +50,7 @@ fi
 _source share.sh
 _source nbd.sh
 _source global.sh
-[ -f ${_PATH_SCRIPT}/perso/perso.sh ]  && _source ${_PATH_SCRIPT}/perso/perso.sh
+[ -f ${_PATH_SCRIPT}/perso/perso.sh ]  && . ${_PATH_SCRIPT}/perso/perso.sh
 _source forensic.sh
 _source autopsy.sh
 _source binwalk.sh
