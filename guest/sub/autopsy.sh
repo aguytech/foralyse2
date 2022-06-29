@@ -17,7 +17,7 @@ if [ -z "${file_soft}" ]; then
 fi
 
 file=/usr/local/bin/oracle-java-installer.sh
-sudo curl -sS https://raw.githubusercontent.com/labcif/oracle-java-installer/master/oracle-java-installer.sh -o ${file}
+sudo curl -sS https://raw.githubusercontent.com/aguytech/oracle-java-installer/master/oracle-java-installer.sh -o ${file}
 sudo sed -i 's|tar -xvzf|tar -xzf|' /usr/local/bin/oracle-java-installer.sh
 sudo chmod +x ${file}
 sudo ${file} --install ${file_soft}
@@ -67,7 +67,7 @@ autopsy --nosplash
 
 ### addons
 
--echoyb "For other addons, see:"
+_echoyb "For other addons, see:"
 echo '
 ##### ReportModules / ForensicExpertWitnessReport
 https://github.com/chriswipat/forensic_expert_witness_report_module
