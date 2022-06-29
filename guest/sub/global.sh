@@ -1,11 +1,21 @@
 #!/bin/bash
 
-### profile
+### path
 
-# add ~/.local/bin to PATH
-path=${HOME}/.local/bin
-[ -d ${path} ] || mkdir -p ${path}
-[ -f ~/.profile ] && . ~/.profile
+paths="${HOME}/.local/bin ${HOME}/.local/share/icons ${HOME}/.local/share/applications ${HOME}/.config/geany/colorschemes"
+for path in ${paths}; do
+	[ -d ${path} ] || mkdir -p ${path}
+done
+
+### user
+
+# add ${HOME}/.local/bin to PATH
+[ -f "${HOME}/.profile" ] && . ${HOME}/.profile
+# icons
+cp ${_PATH_SCRIPT}/icons/* ${HOME}/.local/share/icons/
+# geany
+path=${HOME}/.config/geany/colorschemes
+cp ${HOME}/repo/foralyse2/guest/conf/geany/
 
 ### upgrade
 
@@ -48,46 +58,16 @@ sudo rm /etc/localtime && sudo ln -sv /usr/share/zoneinfo/Etc/UTC /etc/localtime
 file=/etc/X11/Xsession.d/56xubuntu-session
 [ -f "${file}" ] && sudo sed -i '/export QT_QPA_PLATFORMTHEME=/ s|=.*$|=qt5ct|' ${file}
 export QT_QPA_PLATFORMTHEME=qt5ct # gtk2
-echo -e "\n# QT\nexport QT_QPA_PLATFORMTHEME=qt5ct " >> ~/.profile
-echo -e "\n#JAVA\nexport _JAVA_OPTIONS=\"-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel \${_JAVA_OPTIONS}\"" >> ~/.profile
+echo -e "\n# QT\nexport QT_QPA_PLATFORMTHEME=qt5ct " >> ${HOME}/.profile
+echo -e "\n#JAVA\nexport _JAVA_OPTIONS=\"-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel \${_JAVA_OPTIONS}\"" >> ${HOME}/.profile
 
 _echoyb "After validation, adjust settings for qt5 and close qt5ct window"
 _ask
 qt5ct 2>/dev/null
 
-### user
-
-paths="${HOME}/.local/share/icons ${HOME}/.local/share/applications"
-for path in ${paths}; do
-	[ -d ${path} ] || mkdir -p ${path}
-done
-
-cp ${_PATH_SCRIPT}/icons/* ~/.local/share/icons/
-
 ##### plank
 
-path=~/.config/autostart
-[ -d ${path} ] || mkdir ${path}
-echo '[Desktop Entry]
-Encoding=UTF-8
-Version=0.9.4
-Type=Application
-Name=plank
-Comment=plank
-Exec=plank
-OnlyShowIn=XFCE;
-RunHook=0
-StartupNotify=false
-Terminal=false
-Hidden=false' > ${path}/plank.desktop
-
+cp ${_PATH_SCRIPT}/xtra/plank.desktop ${HOME}/.local/share/applications/
 _echoyb "After validation, adjust plank preferences and close plank window"
 _ask
 plank --preferences &
-
-##### menu
-
-#_echoyb "After validation, modify menu"
-#_ask
-#menulibre
-
