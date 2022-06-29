@@ -50,7 +50,7 @@ fi
 _source share.sh
 _source nbd.sh
 _source global.sh
-[ -f ${_PATH_SCRIPT}/sub/perso.sh ]  && _source perso.sh
+[ -f ${_PATH_SCRIPT}/perso/perso.sh ]  && _source ${_PATH_SCRIPT}/perso/perso.sh
 _source forensic.sh
 _source autopsy.sh
 _source binwalk.sh
@@ -61,7 +61,6 @@ _source idafree.sh
 _source bytecode.sh
 _source luyten.sh
 _source cfr.sh
-[ -f ${_PATH_SCRIPT}/sub/sublimetext.sh ]  && _source sublimetext.sh
 # _source kali.sh
 #_source pandoc.sh
 _source clean.sh
