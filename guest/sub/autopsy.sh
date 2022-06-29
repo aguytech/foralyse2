@@ -58,7 +58,7 @@ sudo chown -R ${USER}:${USER} ${path}
 cd /opt/autopsy
 sh unix_setup.sh
 
-ln -sv ${path}/bin/autopsy ~/.local/bin/autopsy
+sudo ln -sv ${path}/bin/autopsy /usr/local/bin/autopsy
 cp ${_PATH_SCRIPT}/conf/autopsy.desktop ~/.local/share/applications/
 
 _echoyb "After validation, close opened autopsy"
