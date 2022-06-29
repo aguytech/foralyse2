@@ -9,7 +9,7 @@ python3 -m pip install -U nose coverage pycryptodome pyqtgraph capstone matplotl
 ##### github
 
 # Install squashfs to extract non-standard SquashFS images
-cd /tmp && curl -O https://raw.githubusercontent.com/aguytech/squashfs4.5/master/build.sh
+cd /tmp && curl -s -O https://raw.githubusercontent.com/aguytech/squashfs4.5/master/build.sh
 sh build.sh
 
 # Install jefferson to extract JFFS2 file systems
