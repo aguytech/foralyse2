@@ -6,7 +6,7 @@ _PATH_SCRIPT=$( readlink -f ${0%/*} )
 
 file=${_PATH_SCRIPT}/sub/inc.sh
 ! [ -f ${file} ] && _exite "Unable to find file: ${file}"
-! . ${file} && _exite "Errors encountered. \nSee log files in /var/lkog/foralyse"
+! . ${file} && _exite "Errors encountered. See log files in /var/log/foralyse"
 
 ### begin
 
@@ -36,6 +36,13 @@ if [ -z "${_PATH_NBD}" ]; then
 	_ask "Give the path to mount dumped disk (${tmp}): "
 	_PATH_NBD=${_ANSWER:-${tmp}}
 	sed -i "/^_PATH_NBD=/ s|=.*$|=${_PATH_NBD}|" ${_FILE_CONF}
+fi
+
+# share
+if grep -q "^/hostshare.*${_PATH_SHARE}" /etc/fstab \
+	&& [ -d "${_PATH_SHARE}" ] \
+	&& ! grep -q "^/hostshare*${_PATH_SHARE}" /proc/mounts
+then sudo mount ${_PATH_SHARE}
 fi
 
 ### sub
