@@ -54,6 +54,3 @@ exec 1> >( tee -a ${path_log}/foralyse.log )    2> >( tee -a ${path_log}/foralys
 
 # PATH
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
-
-# share
-grep -q "^/hostshare.*${_PATH_SHARE}" /etc/fstab && [ -d "${_PATH_SHARE}" ] && sudo mount ${_PATH_SHARE}
