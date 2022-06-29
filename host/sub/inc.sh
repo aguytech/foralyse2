@@ -53,4 +53,6 @@ sudo chown ${USER}:${USER} -R ${path_log}
 exec 1> >( tee -a ${path_log}/foralyse.log )    2> >( tee -a ${path_log}/foralyse.err )
 
 # PATH
-[ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
+if [ -d "${HOME}/.local/bin" ]; then
+	PATH="${HOME}/.local/bin:${PATH}"
+fi
