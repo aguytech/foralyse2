@@ -6,7 +6,7 @@ _PATH_SCRIPT=$( readlink -f ${0%/*} )
 
 file=${_PATH_SCRIPT}/sub/inc.sh
 ! [ -f ${file} ] && _exite "Unable to find file: ${file}"
-! . ${file} && _exite "Errors encountered. See log files in /var/log/foralyse"
+! . ${file} && _exite "Errors while importing inc.sh. See log files in /var/log/foralyse"
 
 ### begin
 
