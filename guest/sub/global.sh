@@ -15,7 +15,7 @@ done
 cp ${_PATH_SCRIPT}/icons/* ${HOME}/.local/share/icons/
 # geany
 path=${HOME}/.config/geany/colorschemes
-cp ${HOME}/repo/foralyse2/guest/conf/geany/
+cp ${HOME}/repo/foralyse2/guest/conf/geany/* ${HOME}/.config/geany/colorschemes/
 
 ### upgrade
 
