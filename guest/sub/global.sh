@@ -20,7 +20,7 @@ sudo apt -y autoremove
 
 sudo apt install -y binutils-common bsdmainutils curl debconf-utils exfatprogs genisoimage git gnupg2 gparted hfsprogs htop kpartx lnav most net-tools p7zip-full p7zip-rar pv rar sysstat testdisk tmux tree unrar vim xsysinfo # openssh-server
 
-sudo apt install -y dconf-editor engrampa galculator gpicview meld plank qt5ct qt5-gtk2-platformtheme thunar-media-tags-plugin tumbler-plugins-extra
+sudo apt install -y dconf-editor engrampa galculator gpicview meld plank qt5ct qt5-gtk2-platformtheme thunar-media-tags-plugin tumbler-plugins-extra xfce4-taskmanager
 
 ### python
 
