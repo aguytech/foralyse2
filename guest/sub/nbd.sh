@@ -2,7 +2,11 @@
 
 ###  nbd
 
-[ -d "${_PATH_NBD}" ] || sudo mkdir -p "${_PATH_NBD}"
+paths="${_PATH_NBD} ${HOME}/.config/gtk-3.0"
+for path in ${paths}; do
+	[ -d ${path} ] || sudo mkdir -p ${path}
+done
+
 file=${_PATH_SCRIPT}/xtra/nbd.sh
 fileto=/usr/local/bin/nbd.sh
 ! [ -f ${file} ] && _exite "Unable to find file: ${file}"
@@ -19,6 +23,10 @@ if [ -f ${file} ]; then
 else
 	echo -e '<?xml version="1.0" encoding="UTF-8"?>\n<actions>\n</actions>' > ${file}
 fi
+
+# bookmarks
+file=${HOME}/.config/gtk-3.0/bookmarks
+grep -q "file://${_PATH_NBD}" ${file} || echo "file://${_PATH_NBD}" >> ${file}
 
 # update already made
 grep -q 1655620394868230-1 ${file} && return
