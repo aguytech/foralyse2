@@ -1,6 +1,6 @@
 #!/bin/bash
 
-### path
+### paths
 
 paths="${HOME}/.local/bin ${HOME}/.local/share/icons ${HOME}/.local/share/applications ${HOME}/.config/geany/colorschemes"
 for path in ${paths}; do

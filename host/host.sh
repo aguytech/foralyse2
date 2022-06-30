@@ -29,7 +29,7 @@ sed -i "/^_PATH_NBD=/ s|=.*$|${_PATH_NBD}|" ${_FILE_CONF}
 
 _source share.sh
 _source nbd.sh
-[ -f ${_PATH_SCRIPT}/perso/perso.sh ]  && . ${_PATH_SCRIPT}/perso/perso.sh
+[ -f ${_PATH_SCRIPT}/perso/perso.sh ] && . ${_PATH_SCRIPT}/perso/perso.sh
 
 _echoy "-----------------------------------------------"
 _echoyb "The installation of Host is done \nGo into the guest to complete installation"
