@@ -48,6 +48,7 @@ fi
 ### sub
 
 _source share.sh
+_source cases.sh
 _source nbd.sh
 _source global.sh
 [ -f ${_PATH_SCRIPT}/perso/perso.sh ]  && . ${_PATH_SCRIPT}/perso/perso.sh

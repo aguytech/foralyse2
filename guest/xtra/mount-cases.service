@@ -1,5 +1,5 @@
 [Unit]
-Description=Mount _PATH_CASE
+Description=Mount cases in _PATH_CASE
 After=systemd-remount-fs.service
  
 [Service]
@@ -7,9 +7,8 @@ After=systemd-remount-fs.service
 Type=oneshot
 RemainAfterExit=yes
  
-ExecStart=/usr/local/bin/mount-cases.sh mount _PATH_CASE
-ExecStop=/usr/local/bin/mount-cases.sh umount _PATH_CASE
- 
+ExecStart=/usr/local/bin/mount-cases.sh mount
+ExecStop=/usr/local/bin/mount-cases.sh umount
+E 
 [Install]
 WantedBy=multi-user.target
-
