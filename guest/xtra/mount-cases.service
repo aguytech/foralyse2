@@ -3,7 +3,6 @@ Description=Mount cases in _PATH_CASE
 After=systemd-remount-fs.service
  
 [Service]
-#Type=simple
 Type=oneshot
 RemainAfterExit=yes
  

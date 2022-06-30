@@ -36,9 +36,14 @@ __umount() {
 
 __cases() {
 	local device
-	while read device; do
-		__${1} "${device}"
-	done <<<$( sudo blkid | grep -i "label=.case" )
+	local cases=$( sudo blkid | grep -i "label=.case" )
+	if [ "${cases}" ]; then
+		while read device; do
+			__${1} "${device}"
+		done <<<$( sudo blkid | grep -i "label=.case" )
+	else
+		echo "Case devices not found"
+	fi
 }
 
 __init() {
@@ -52,7 +57,6 @@ __init() {
 }
 
 _PATH_CASE=
-_PATH_CASE=/foralyse/cases
 
 __init $*
 
