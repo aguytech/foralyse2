@@ -25,8 +25,8 @@ if [ -z "${_PATH_SHARE}" ]; then
 fi
 
 if [ -z "${_PATH_CASE}" ]; then
-	tmp=/foralyse/case
-	_ask "Give the path to mount case (${tmp}): "
+	tmp=/foralyse/cases
+	_ask "Give the path to mount cases (${tmp}): "
 	_PATH_CASE=${_ANSWER:-${tmp}}
 	sed -i "/^_PATH_CASE=/ s|=.*$|=${_PATH_CASE}|" ${_FILE_CONF}
 fi

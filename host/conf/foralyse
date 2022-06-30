@@ -3,9 +3,5 @@
 # Path to share data between this guest and the host.
 _PATH_SHARE=
 
-# Path to mount disk file in this guest. This file contains the data of study case.
-# it used by the service mount-case.service
-_PATH_CASE=
-
 # Path to mount dumped disk file in this guest. All partitions contains by this device file will be mounted under this path.
 _PATH_NBD=
