@@ -69,7 +69,7 @@ qt5ct 2>/dev/null
 
 ##### plank
 
-cp ${_PATH_SCRIPT}/xtra/plank.desktop ${HOME}/.local/share/applications/
+cp ${_PATH_SCRIPT}/xtra/plank.desktop ${HOME}/.config/autostart/
 _echoyb "After validation, adjust plank preferences and close plank window"
 _ask
 plank --preferences &
