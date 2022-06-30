@@ -14,6 +14,10 @@ sudo cp ${file} ${fileto}
 sudo sed -i "/^_PATH_NBD=/ s|=.*$|=${_PATH_NBD}|" ${fileto}
 sudo chmod +x /usr/local/bin/nbd.sh
 
+# bookmarks
+file=${HOME}/.config/gtk-3.0/bookmarks
+grep -q "file://${_PATH_NBD}" ${file} || echo "file://${_PATH_NBD}" >> ${file}
+
 ###  Thunar custom actions
 
 file=~/.config/Thunar/uca.xml
@@ -23,10 +27,6 @@ if [ -f ${file} ]; then
 else
 	echo -e '<?xml version="1.0" encoding="UTF-8"?>\n<actions>\n</actions>' > ${file}
 fi
-
-# bookmarks
-file=${HOME}/.config/gtk-3.0/bookmarks
-grep -q "file://${_PATH_NBD}" ${file} || echo "file://${_PATH_NBD}" >> ${file}
 
 # update already made
 grep -q 1655620394868230-1 ${file} && return
