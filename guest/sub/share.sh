@@ -22,4 +22,3 @@ sudo mount ${_PATH_SHARE}
 # bookmarks
 file=${HOME}/.config/gtk-3.0/bookmarks
 grep -q "file://${_PATH_SHARE}" ${file} || echo "file://${_PATH_SHARE}" >> ${file}
-
