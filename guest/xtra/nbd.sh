@@ -26,6 +26,7 @@ __mount_nbd() {
 		if [ $(cat ${block}/size) = 0 ]; then
 			if qemu-nbd -c /dev/${block##*/} "${_FILE}"; then
 				echo -e "/dev/${block##*/}\t${_FILE}" >> ${_NBD_FILE}
+				sleep 0.2
 			else
 				echo "Unable to mount ${_FILE} in /dev/${block##*/}" >&2
 				exit 1
