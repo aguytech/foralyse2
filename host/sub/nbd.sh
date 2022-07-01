@@ -1,14 +1,23 @@
 #!/bin/bash
 
-###  nbd
+###  install
 
-[ -d "${_PATH_NBD}" ] || sudo mkdir -p "${_PATH_NBD}"
+sudo apt install -y qemu-utils
+
+###  conf
+
+# paths
+paths="${_PATH_NBD}"
+for path in ${paths}; do
+	[ -d ${path} ] || sudo mkdir -p ${path}
+done
+
+# script
 file=${_PATH_SCRIPT}/xtra/nbd.sh
-fileto=/usr/local/bin/nbd.sh
 ! [ -f ${file} ] && _exite "Unable to find file: ${file}"
-sudo cp ${file} ${fileto}
-sudo sed -i "/^_PATH_NBD=/ s|=.*$|=${_PATH_NBD}|" ${fileto}
+sudo cp ${file} /usr/local/bin/nbd.sh
 sudo chmod +x /usr/local/bin/nbd.sh
+sudo sed -i "/^_PATH_NBD=/ s|=.*$|=${_PATH_NBD}|" /usr/local/bin/nbd.sh
 
 ###  Thunar custom actions
 
