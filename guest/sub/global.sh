@@ -4,7 +4,7 @@
 
 paths="${HOME}/.local/bin ${HOME}/.local/share/icons ${HOME}/.local/share/applications ${HOME}/.config/geany/colorschemes"
 for path in ${paths}; do
-	[ -d ${path} ] || mkdir -p ${path}
+	[ -d "${path}" ] || mkdir -p ${path}
 done
 
 ### user
@@ -14,8 +14,7 @@ done
 # icons
 cp ${_PATH_SCRIPT}/icons/* ${HOME}/.local/share/icons/
 # geany
-path=${HOME}/.config/geany/colorschemes
-cp ${HOME}/repo/foralyse2/guest/conf/geany/* ${HOME}/.config/geany/colorschemes/
+cp ${_PATH_SCRIPT}/conf/geany/* ${HOME}/.config/geany/colorschemes/
 # thunar-volman
 xfconf-query -c thunar-volman -p /autobrowse/enabled -s false
 xfconf-query -c thunar-volman -p /automount-drives/enabled -s false
