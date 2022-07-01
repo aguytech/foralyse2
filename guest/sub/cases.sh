@@ -6,9 +6,9 @@ for path in ${paths}; do
 done
 
 # script
-sudo cp ${_PATH_SCRIPT}/xtra/mount-cases.sh /usr/local/bin/
-sudo sed -i "/^_PATH_CASE=/ s|=.*$|=${_PATH_CASE}|" /usr/local/bin/mount-cases.sh
+sudo cp ${_PATH_SCRIPT}/xtra/mount-cases.sh /usr/local/bin/mount-cases.sh
 sudo chmod 755 /usr/local/bin/*.sh
+sudo sed -i "/^_PATH_CASE=/ s|=.*$|=${_PATH_CASE}|" /usr/local/bin/mount-cases.sh
 
 # service
 sudo cp ${_PATH_SCRIPT}/xtra/mount-cases.service /etc/systemd/system/
