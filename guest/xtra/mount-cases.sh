@@ -13,11 +13,13 @@ __mount() {
 	eval "$( echo $1 | cut -d' ' -f2- | tr ' ' '\n' | sed 's|^|_|' )"
 	#echo -e "_DEV=${_DEV} \n_LABEL=${_LABEL} \n_UUID=${_UUID} \n_BLOCK_SIZE=${_BLOCK_SIZE} \n_TYPE=${_TYPE} \n_PARTUUID=${_PARTUUID}"
 	path=${_PATH_CASE}/${_LABEL}_${_UUID}
+	[ -z "${_UUID}" ] && path=${_PATH_CASE}/${_LABEL}_${_PARTUUID}
 	[ -d "${path}" ] || mkdir "${path}"
 	if grep -q "${path}" /proc/mounts; then
 		echo "${path} already mounted"
 	else
 		mount UUID=${_UUID} ${path}
+		echo "${path} mounted"
 	fi
 }
 
@@ -26,10 +28,12 @@ __umount() {
 	eval "$( echo $1 | cut -d' ' -f2- | tr ' ' '\n' | sed 's|^|_|' )"
 	#echo -e "_DEV=${_DEV} \n_LABEL=${_LABEL} \n_UUID=${_UUID} \n_BLOCK_SIZE=${_BLOCK_SIZE} \n_TYPE=${_TYPE} \n_PARTUUID=${_PARTUUID}"
 	path=${_PATH_CASE}/${_LABEL}_${_UUID}
+	[ -z "${_UUID}" ] && path=${_PATH_CASE}/${_LABEL}_${_PARTUUID}
 	if grep -q "${path}" /proc/mounts; then
 		umount ${path}
+		echo "${path} unmounted"
 	else
-		echo "${path} not mounted"
+		echo "${path} already unmounted"
 	fi
 	[ -d "${path}" ] && rmdir "${path}"
 }
