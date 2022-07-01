@@ -1,12 +1,18 @@
 #!/bin/bash
 
-###  nbd
+###  install
 
+sudo apt install -y qemu-utils
+
+###  conf
+
+# paths
 paths="${_PATH_NBD} ${HOME}/.config/gtk-3.0"
 for path in ${paths}; do
 	[ -d ${path} ] || sudo mkdir -p ${path}
 done
 
+# script
 file=${_PATH_SCRIPT}/xtra/nbd.sh
 fileto=/usr/local/bin/nbd.sh
 ! [ -f ${file} ] && _exite "Unable to find file: ${file}"
