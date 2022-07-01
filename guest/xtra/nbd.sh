@@ -85,9 +85,10 @@ __init() {
 	# variables
 	script=${0##*/}
 	_NBD_FILE=/tmp/${script}
+	# log
 	path_log=/var/log/foralyse
-	file_log=${path_log}/${script%.*}
 	[ -d ${path_log} ] || sudo mkdir -p ${path_log}
+	echo -e "\n### $( date "+%Y%m%d-%H:%M:%S" )" | tee -a ${path_log}/${script%.*}.log > tee -a ${path_log}/${script%.*}.err
 	# exec
 	exec 1> >( tee -a ${path_log}/${script%.*}.log )    2> >( tee -a ${path_log}/${script%.*}.err )
 

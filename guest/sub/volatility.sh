@@ -33,7 +33,6 @@ cmake -G"Unix Makefiles" ../
 sudo make install
 cd ../python
 sudo python2 setup.py install
-#sudo ln -sv /usr/local/lib/libforensic1394.so.0.3.0 /usr/lib/libforensic1394.so.2
 
 cd
 sudo rm -fR /tmp/libforensic1394
