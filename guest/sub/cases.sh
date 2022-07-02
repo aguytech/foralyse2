@@ -6,9 +6,12 @@ for path in ${paths}; do
 done
 
 # script
-sudo cp ${_PATH_SCRIPT}/xtra/mount-cases.sh /usr/local/bin/mount-cases.sh
-sudo chmod 755 /usr/local/bin/*.sh
-sudo sed -i "/^_PATH_CASE=/ s|=.*$|=${_PATH_CASE}|" /usr/local/bin/mount-cases.sh
+file=${_PATH_SCRIPT}/xtra/mount-cases.sh
+file2=/usr/local/bin/${file##*/}
+! [ -f ${file} ] && _exite "Unable to find file: ${file}"
+sudo cp ${file} ${file2}
+sudo chmod 755 ${file2}
+sudo sed -i "/^_PATH_CASE=/ s|=.*$|=${_PATH_CASE}|" ${file2}
 
 # service
 sudo cp ${_PATH_SCRIPT}/xtra/mount-cases.service /etc/systemd/system/

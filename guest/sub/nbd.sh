@@ -14,10 +14,11 @@ done
 
 # script
 file=${_PATH_SCRIPT}/xtra/nbd.sh
+file2=/usr/local/bin/${file##*/}
 ! [ -f ${file} ] && _exite "Unable to find file: ${file}"
-sudo cp ${file} /usr/local/bin/nbd.sh
-sudo chmod +x /usr/local/bin/nbd.sh
-sudo sed -i "/^_PATH_NBD=/ s|=.*$|=${_PATH_NBD}|" /usr/local/bin/nbd.sh
+sudo cp ${file} ${file2}
+sudo chmod +x ${file2}
+sudo sed -i "/^_PATH_NBD=/ s|=.*$|=${_PATH_NBD}|" ${file2}
 
 # bookmarks
 file=${HOME}/.config/gtk-3.0/bookmarks

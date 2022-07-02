@@ -50,8 +50,6 @@ python2 -m pip install -U pip
 
 ##### global
 
-sudo cp ${_PATH_SCRIPT}/xtra/*.sh /usr/local/bin/
-
 sudo swapoff -av
 sudo sh -c 'echo vm.swappiness=10 > /etc/sysctl.d/99-swappiness.conf' # limit swap
 sudo swapon -v
