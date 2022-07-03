@@ -1,10 +1,10 @@
 #!/bin/bash
 
-_PATH_SCRIPT=$( readlink -f ${0%/*} )
+_PATH_BASE=$( readlink -f ${0%/*} )
 
 ### functions
 
-file=${_PATH_SCRIPT}/sub/inc.sh
+file=${_PATH_BASE}/sub/inc.sh
 ! [ -f ${file} ] && _exite "Unable to find file: ${file}"
 ! . ${file} && _exite "Errors while importing inc.sh. See log files in /var/log/foralyse"
 
@@ -14,7 +14,7 @@ _echoyb "- Use from the GUEST"
 
 # user conf
 _FILE_CONF=${HOME}/.config/foralyse
-[ -f ${_FILE_CONF} ] || cp ${_PATH_SCRIPT}/conf/foralyse ${_FILE_CONF}
+[ -f ${_FILE_CONF} ] || cp ${_PATH_BASE}/conf/foralyse ${_FILE_CONF}
 . ${_FILE_CONF}
 
 if [ -z "${_PATH_SHARE}" ]; then
@@ -51,7 +51,7 @@ _source share.sh
 _source cases.sh
 _source nbd.sh
 _source global.sh
-[ -f ${_PATH_SCRIPT}/perso/perso.sh ]  && . ${_PATH_SCRIPT}/perso/perso.sh
+[ -f ${_PATH_BASE}/perso/perso.sh ]  && . ${_PATH_BASE}/perso/perso.sh
 _source forensic.sh
 _source autopsy.sh
 _source binwalk.sh

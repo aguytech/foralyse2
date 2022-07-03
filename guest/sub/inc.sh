@@ -25,7 +25,7 @@ _ask() {
 _source() {
 	if ! grep -q ^$1 ${_FILE_DONE}; then
 		echo -e "\n${yellowb}> $1${cclear}"
-		local file="${_PATH_SCRIPT}/sub/$1"
+		local file="${_PATH_BASE}/sub/$1"
 		! [ -f "${file}" ] && _exite "Unable to find file: ${file}"
 		if . "${file}"; then
 			echo $1 >> ${_FILE_DONE}

@@ -12,9 +12,9 @@ done
 # add ${HOME}/.local/bin to PATH
 [ -f "${HOME}/.profile" ] && . ${HOME}/.profile
 # icons
-cp ${_PATH_SCRIPT}/icons/* ${HOME}/.local/share/icons/
+cp ${_PATH_BASE}/icons/* ${HOME}/.local/share/icons/
 # geany
-cp ${_PATH_SCRIPT}/conf/geany/* ${HOME}/.config/geany/colorschemes/
+cp ${_PATH_BASE}/conf/geany/* ${HOME}/.config/geany/colorschemes/
 # thunar-volman
 xfconf-query -c thunar-volman -p /autobrowse/enabled -s false
 xfconf-query -c thunar-volman -p /automount-drives/enabled -s false
@@ -70,7 +70,7 @@ qt5ct 2>/dev/null
 
 ##### plank
 
-cp ${_PATH_SCRIPT}/xtra/plank.desktop ${HOME}/.config/autostart/
+cp ${_PATH_BASE}/xtra/plank.desktop ${HOME}/.config/autostart/
 _echoyb "After validation, adjust plank preferences and close plank window"
 _ask
 plank --preferences &

@@ -59,7 +59,7 @@ cd /opt/autopsy
 sh unix_setup.sh
 
 sudo ln -sv ${path}/bin/autopsy /usr/local/bin/autopsy
-cp ${_PATH_SCRIPT}/xtra/autopsy.desktop ~/.local/share/applications/
+cp ${_PATH_BASE}/xtra/autopsy.desktop ~/.local/share/applications/
 
 _echoyb "After validation, close opened autopsy"
 _ask

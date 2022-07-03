@@ -13,7 +13,7 @@ for path in ${paths}; do
 done
 
 # script
-file=${_PATH_SCRIPT}/xtra/nbd.sh
+file=${_PATH_BASE}/xtra/nbd.sh
 file2=/usr/local/bin/${file##*/}
 ! [ -f ${file} ] && _exite "Unable to find file: ${file}"
 sudo cp ${file} ${file2}
@@ -34,7 +34,7 @@ fi
 grep -q 1655620394868230-1 ${file} && return
 
 sed -i '$,1d' ${file}
-cat ${file} ${_PATH_SCRIPT}/conf/ca.xml > ${file}.tmp
+cat ${file} ${_PATH_BASE}/conf/ca.xml > ${file}.tmp
 mv ${file}.tmp ${file}
 
 _echoyb "logout/login from your computer to apply changes"
