@@ -5,8 +5,8 @@ _PATH_BASE=$( readlink -f ${0%/*} )
 ### functions
 
 file=${_PATH_BASE}/sub/inc.sh
-! [ -f ${file} ] && _exite "Unable to find file: ${file}"
-! . ${file} && _exite "Errors while importing inc.sh. See log files in /var/log/foralyse"
+! [ -f ${file} ] && echo "Unable to find file: ${file}" && exit 1
+! . ${file} && echo "Errors while importing ${file}" && exit 1
 
 ### begin
 
