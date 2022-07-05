@@ -2,7 +2,7 @@
 
 paths="${_PATH_SHARE} ${HOME}/.config/gtk-3.0"
 for path in ${paths}; do
-	[ -d ${path} ] || sudo mkdir -p ${path}
+	[ -d "${path}" ] || sudo mkdir -p ${path}
 done
 
 file=/etc/initramfs-tools/modules

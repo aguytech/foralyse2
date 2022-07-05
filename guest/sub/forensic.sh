@@ -43,5 +43,5 @@ sudo chmod +x ${file}
 
 #### bless
 path=~/.config/bless/layouts/
-[ -d ${path} ] || mkdir -p ${path}
+[ -d "${path}" ] || mkdir -p ${path}
 cp /usr/share/bless/*.layout ${path}/

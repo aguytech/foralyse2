@@ -9,13 +9,13 @@ sudo apt install -y qemu-utils
 # paths
 paths="${_PATH_NBD}"
 for path in ${paths}; do
-	[ -d ${path} ] || sudo mkdir -p ${path}
+	[ -d "${path}" ] || sudo mkdir -p ${path}
 done
 
 # script
 file=${_PATH_BASE}/xtra/nbd.sh
 file2=/usr/local/bin/${file##*/}
-! [ -f ${file} ] && _exite "Unable to find file: ${file}"
+! [ -f "${file}" ] && _exite "Unable to find file: ${file}"
 sudo cp ${file} ${file2}
 sudo chmod +x ${file2}
 sudo sed -i "/^_PATH_NBD=/ s|=.*$|=${_PATH_NBD}|" ${file2}
@@ -24,7 +24,7 @@ sudo sed -i "/^_PATH_NBD=/ s|=.*$|=${_PATH_NBD}|" ${file2}
 
 file=~/.config/Thunar/uca.xml
 [ -d ~/.config/Thunar ] || mkdir -p ~/.config/Thunar
-if [ -f ${file} ]; then
+if [ -f "${file}" ]; then
 	[ -f ${file}.keep ] || cp -a ${file} ${file}.keep
 else
 	echo -e '<?xml version="1.0" encoding="UTF-8"?>\n<actions>\n</actions>' > ${file}

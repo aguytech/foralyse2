@@ -9,7 +9,7 @@ if [ -z "${file_soft}" ]; then
 fi
 
 path=/tmp/bt
-[ -d ${path} ] || mkdir -p ${path}
+[ -d "${path}" ] || mkdir -p ${path}
 cd ${path}
 tar xzf "${file_soft}"
 sudo mv opt/bytecode* /opt/

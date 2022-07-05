@@ -26,6 +26,6 @@ ${file_soft}
 
 sudo ln -sv ${path}/ida64 /usr/local/bin/idafree 
 file=~/.local/share/applications/
-[ -f ${file} ] && rm ${file}
+[ -f "${file}" ] && rm ${file}
 cp ${_PATH_BASE}/xtra/idafree.desktop  ~/.local/share/applications/
 

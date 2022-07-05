@@ -46,9 +46,9 @@ whiteb='\e[1;1m'; redb='\e[1;31m'; greenb='\e[1;32m'; blueb='\e[1;34m'; magentab
 path_log=/var/log/foralyse
 _FILE_DONE=${path_log}/foralyse.done
 # path & file
-sudo [ -d ${path_log} ] || sudo mkdir -p ${path_log}
+sudo [ -d "${path_log}" ] || sudo mkdir -p ${path_log}
 sudo chown ${USER}:${USER} -R ${path_log}
-[ -f ${_FILE_DONE} ] || touch ${_FILE_DONE}
+[ -f "${_FILE_DONE}" ] || touch ${_FILE_DONE}
 # exec
 exec 1> >( tee -a ${path_log}/foralyse.log )    2> >( tee -a ${path_log}/foralyse.err )
 

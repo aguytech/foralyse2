@@ -71,7 +71,7 @@ __umount_dev() {
 		if grep -q ${nbd} /proc/mounts && umount ${path}; then
 			echo "${nbd} unmounted"
 		fi
-		[ -d ${path} ] && rmdir ${path}
+		[ -d "${path}" ] && rmdir ${path}
 	done
 }
 
@@ -88,7 +88,7 @@ __init() {
 	_NBD_FILE=/tmp/${script}
 	# log
 	path_log=/var/log/foralyse
-	[ -d ${path_log} ] || sudo mkdir -p ${path_log}
+	[ -d "${path_log}" ] || sudo mkdir -p ${path_log}
 	echo -e "\n### $( date "+%Y%m%d-%H:%M:%S" )" | tee -a ${path_log}/${script%.*}.log > tee -a ${path_log}/${script%.*}.err
 	# exec
 	exec 1> >( tee -a ${path_log}/${script%.*}.log )    2> >( tee -a ${path_log}/${script%.*}.err )
@@ -96,7 +96,7 @@ __init() {
 	# nbd path
 	! [ -d "${_PATH_NBD}" ] && echo "Unable to find path: _PATH_NBD=${_PATH_NBD}" >&2 && exit 1
 	# nbd file
-	[ -f ${_NBD_FILE} ] || touch ${_NBD_FILE}
+	[ -f "${_NBD_FILE}" ] || touch ${_NBD_FILE}
 	# root privileges
 	[ "${USER}" != root  ] && echo "Root privileges are needed" >&2 && __usage
 	# Wrong parameters numbers
