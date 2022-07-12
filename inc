@@ -33,7 +33,7 @@ _source() {
 		if . "${file}"; then
 			echo $1 >> ${_FILE_DONE}
 			echo -e "${yellowb}< $1${cclear}\n"
-			_ask
+			_askno "Validate to continue"
 		else
 			echo -e "${redb}See file log $1 for errors${cclear}"
 			exit

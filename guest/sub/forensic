@@ -3,29 +3,29 @@
 ### global
 
 #### binary
-sudo apt install -y vbindiff bsdiff
+${_CMD_INS} vbindiff bsdiff
 
 #### network
-sudo apt install -y whois
+${_CMD_INS} whois
 
 #### pwd & evtx & process
-sudo apt install -y john libscca-utils pev
+${_CMD_INS} john libscca-utils pev
 
 # radare2 via snap
 #sudo snap install --edge --jailmode radare2
 # from github https://github.com/radareorg/radare2/releases
 file=radare2-dev_5.7.2_amd64.deb
 curl -L -o /tmp/${file} https://github.com/radareorg/radare2/releases/download/5.7.2/${file}
-sudo apt install -y /tmp/${file}
+${_CMD_INS} /tmp/${file}
 
 # r2env via pip3
 python3 -m pip install -U r2env
 
 #### hive
-sudo apt install -y libhivex-bin chntpw reglookup
+${_CMD_INS} libhivex-bin chntpw reglookup
 
 #### gui
-sudo apt install -y bless geany ghex gpicview gtkhash wxhexeditor
+${_CMD_INS} bless geany ghex gpicview gtkhash wxhexeditor
 
 ### pip
 

@@ -7,9 +7,9 @@ python3 -m pip install -U pefile yara-python capstone pycryptodome jsonschema le
 python3 -m pip install -U volatility3
 cd ~/.local/bin && ln -sv vol vol3
 
-_echoy vol3
+_echoa vol3
 vol3 -h
-_ask
+_askno "Validate to continue"
 
 ### volatility2
 
@@ -17,13 +17,13 @@ _ask
 
 ##### global
 
-sudo apt install -y pcregrep libpcre++-dev python2-dev
+${_CMD_INS} pcregrep libpcre++-dev python2-dev
 
 python2 -m pip install distorm3 ipython openpyxl pycrypto pytz ujson yara-python
 
 ##### libforensic1394
 
-sudo apt install -y cmake
+${_CMD_INS} cmake
 
 cd /tmp
 git clone https://github.com/FreddieWitherden/libforensic1394
@@ -36,8 +36,8 @@ sudo python2 setup.py install
 
 cd
 sudo rm -fR /tmp/libforensic1394
-sudo apt remove -y cmake
-sudo apt -y autoremove
+${_CMD} remove -y cmake
+${_CMD} -y autoremove
 
 ##### volatility
 
@@ -50,6 +50,6 @@ sudo python2 setup.py install
 cd /usr/local/bin
 sudo ln -sv vol.py vol2
 
-_echoy vol2
+_echoa vol2
 vol2 -h
 

@@ -10,7 +10,7 @@ file=${_PATH_BASE}/../inc
 
 ### begin
 
-_echoyb "- Use from the GUEST"
+_echoA "- Use from the GUEST"
 
 if [ -z "${_PATH_SHARE}" ]; then
 	anstmp=/foralyse/share
@@ -48,8 +48,8 @@ parts+=" forensic autopsy binwalk regripper volatility"
 parts+=" wireshark idafree bytecode luyten cfr clean"
 # kali pandoc
 for part in ${parts}; do
-	_source ${part}
+	_source_sub ${part}
 done
 
-_echoy "\n-----------------------------------------------"
-_echoyb "This installation is complete \nRestart the guest"
+_echoa "\n-----------------------------------------------"
+_echoA "This installation is complete \nRestart the guest"

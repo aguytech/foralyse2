@@ -1,5 +1,5 @@
 #!/bin/bash
 
-sudo apt update
-sudo apt -y dist-upgrade
-sudo apt -y autoremove
+${_CMD} update
+${_CMD} -y dist-upgrade
+${_CMD} -y autoremove

@@ -2,8 +2,8 @@
 
 file_soft=$( ls ${_PATH_SHARE}/trans/luyten-*.tar.gz )
 if [ -z "${file_soft}" ]; then
-	_echoyb "Put the pre-package of bytecode  for linux from autopsy website \nand put the file autopsy-*.zip in shared path: ${_PATH_SHARE}"
-	_ask
+	_echoA "Put the pre-package of bytecode  for linux from autopsy website \nand put the file autopsy-*.zip in shared path: ${_PATH_SHARE}"
+	_askno "Validate to continue"
 	file_soft=$( ls ${_PATH_SHARE}/trans/luyten-*.tar.gz )
 	[ -z "${file_soft}" ] && _exite "Unable to find file: ${file_soft}"
 fi

@@ -2,7 +2,7 @@
 
 ### dependencies
 
-sudo apt-get install -y libparse-win32registry-perl
+${_CMD_INS} libparse-win32registry-perl
 
 ### install / conf
 

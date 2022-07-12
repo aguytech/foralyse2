@@ -2,16 +2,16 @@
 
 ### global
 
-sudo apt-get update
-sudo apt install -y afflib-tools testdisk ewf-tools xmount fdupes java-common
-sudo apt-get install -y imagemagick libde265-0 libheif1
+${_CMD} update
+${_CMD_INS} afflib-tools testdisk ewf-tools xmount fdupes java-common
+${_CMD_INS} imagemagick libde265-0 libheif1
 
 ### java
 
 file_soft=$(ls ${_PATH_SHARE}/trans/jdk-8*linux-x64.tar.gz)
 if [ -z "${file_soft}" ]; then
-	_echoyb "Download jdk v8 from Oracle website \nand put the file jdk-8*linux-x64.tar.gz in shared path: ${_PATH_SHARE}"
-	_ask
+	_echoA "Download jdk v8 from Oracle website \nand put the file jdk-8*linux-x64.tar.gz in shared path: ${_PATH_SHARE}"
+	_askno "Validate to continue"
 	file_soft=$(ls ${_PATH_SHARE}/trans/jdk-8*linux-x64.tar.gz)
 	[ -z "${file_soft}" ] && _exite "Unable to find file: ${file_soft}"
 fi
@@ -28,8 +28,8 @@ ${file} --status ${file_soft}
 
 file_soft=$(ls ${_PATH_SHARE}/trans/sleuthkit-java_*_amd64.deb)
 if [ -z "${file_soft}" ]; then
-	_echoyb "Download sleuthkit deb file from sleuthkit website \nand put the file sleuthkit-java_*_amd64.deb in shared path: ${_PATH_SHARE}"
-	_ask
+	_echoA "Download sleuthkit deb file from sleuthkit website \nand put the file sleuthkit-java_*_amd64.deb in shared path: ${_PATH_SHARE}"
+	_askno "Validate to continue"
 	file_soft=$(ls ${_PATH_SHARE}/trans/sleuthkit-java_*_amd64.deb)
 	[ -z "${file_soft}" ] && _exite "Unable to find file: ${file_soft}"
 fi
@@ -37,19 +37,19 @@ fi
 # get versions
 # read sleuthkit_version_major sleuthkit_version_minor <<<$(echo ${file_soft}|sed 's|^.*/sleuthkit-java_\([0-9_\.]\+\)-\([0-9]\)_amd64.deb|\1 \2|')
 
-sudo apt install -y ${file_soft}
+${_CMD_INS} ${file_soft}
 
 ### autopsy
 
 file_soft=$(ls ${_PATH_SHARE}/trans/autopsy-*.zip)
 if [ -z "${file_soft}" ]; then
-	_echoyb "Download autopsy for linux from autopsy website \nand put the file autopsy-*.zip in shared path: ${_PATH_SHARE}"
-	_ask
+	_echoA "Download autopsy for linux from autopsy website \nand put the file autopsy-*.zip in shared path: ${_PATH_SHARE}"
+	_askno "Validate to continue"
 	file_soft=$(ls ${_PATH_SHARE}/trans/autopsy-*.zip)
 	[ -z "${file_soft}" ] && _exite "Unable to find file: ${file_soft}"
 fi
 
-_echoy unzip ${file_soft}
+_echoa unzip ${file_soft}
 sudo unzip -q -d /opt/ ${file_soft}
 
 path=/opt/autopsy
@@ -61,13 +61,13 @@ sh unix_setup.sh
 sudo ln -sv ${path}/bin/autopsy /usr/local/bin/autopsy
 cp ${_PATH_BASE}/xtra/autopsy.desktop ~/.local/share/applications/
 
-_echoyb "After validation, close opened autopsy"
-_ask
+_echoA "After validation, close opened autopsy"
+_askno "Validate to continue"
 autopsy --nosplash
 
 ### addons
 
-_echoyb "For other addons, see:"
+_echoA "For other addons, see:"
 echo '
 ##### ReportModules / ForensicExpertWitnessReport
 https://github.com/chriswipat/forensic_expert_witness_report_module

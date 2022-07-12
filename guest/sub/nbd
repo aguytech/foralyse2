@@ -2,7 +2,7 @@
 
 ###  install
 
-sudo apt install -y qemu-utils
+${_CMD_INS} qemu-utils
 
 ###  conf
 
@@ -41,4 +41,4 @@ sed -i '$,1d' ${file}
 cat ${file} ${_PATH_BASE}/conf/ca.xml > ${file}.tmp
 mv ${file}.tmp ${file}
 
-_echoyb "logout/login from your computer to apply changes"
+_echoA "logout/login from your computer to apply changes"
