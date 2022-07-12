@@ -2,16 +2,14 @@
 
 ######################## CONF
 
+_TRACE=info
 _PATH_BASE=$( readlink -f ${0%/*} )
 _PATH_CONF=${HOME}/.config/foralyse
 _PATH_LOG=/var/log/foralyse
-_CMD="sudo apt"
-_CMD_INS="sudo apt install -y"
-_TRACE=info
 _FILE_CONF=${_PATH_CONF}/foralyse
 
 [ -d "${_PATH_CONF}" ] || mkdir -p ${_PATH_CONF}
-[ -f "${_FILE_CONF}" ] || { cp ${_PATH_BASE}/conf/foralyse ${_PATH_CONF}/; }
+[ -f "${_FILE_CONF}" ] || { cp ${_PATH_BASE}/conf/foralyse ${_FILE_CONF}; }
 
 # functions
 file=${_PATH_BASE}/../inc

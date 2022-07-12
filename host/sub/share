@@ -8,7 +8,7 @@ sudo setfacl -d -Rm u:libvirt-qemu:rwx ${_PATH_SHARE}
 sudo setfacl -Rm g:libvirt-qemu:rwx ${_PATH_SHARE}
 sudo setfacl -d -Rm g:libvirt-qemu:rwx ${_PATH_SHARE}
 
-_echoA "Configure in virt-manager the shared path like this with this paramaters:"
+_echoA "Configure your guest in virt-manager to share path with this parameters: "
 echo "Source path: ${_PATH_SHARE}"
 echo "Target path: /hostshare"
 _echoA "\nAnd add fmode and dmode by modifying XML settings options in virt-manager:"
