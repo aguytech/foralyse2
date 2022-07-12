@@ -31,9 +31,15 @@ ${_CMD} -y autoremove
 
 ##### system
 
-${_CMD_INS} binutils-common bsdmainutils curl debconf-utils exfatprogs genisoimage git gnupg2 gparted hfsprogs htop kpartx lnav most net-tools p7zip-full p7zip-rar pv rar sysstat testdisk tmux tree unrar vim xsysinfo # openssh-server
+packages="binutils-common bsdmainutils curl debconf-utils exfatprogs genisoimage xsysinfo"
+packages+=" git gnupg2 gparted hfsprogs htop kpartx lnav most net-tools tmux vim"
+packages+=" p7zip-full p7zip-rar pv rar sysstat testdisk tmux tree unrar"
+# openssh-server
+${_CMD_INS} ${packages}
 
-${_CMD_INS} dconf-editor engrampa galculator gpicview meld plank qt5ct qt5-gtk2-platformtheme thunar-media-tags-plugin tumbler-plugins-extra xfce4-taskmanager
+packages="dconf-editor engrampa galculator gpicview meld plank qt5ct qt5-gtk2-platformtheme"
+packages+=" thunar-media-tags-plugin tumbler-plugins-extra xfce4-taskmanager"
+${_CMD_INS} ${packages}
 
 ### python
 
