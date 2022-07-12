@@ -2,7 +2,14 @@
 
 ###  install
 
-${_CMD_INS} qemu-utils
+if type apt >/dev/null 2>&1; then
+	sudo apt install -y qemu-utils
+elif type pacman >/dev/null 2>&1; then
+	sudo pacman --noconfirm -S qemu-img
+else
+	_echoA "Install package in your system to have binary qemu-nbd available"
+	_exit
+fi
 
 ###  conf
 
