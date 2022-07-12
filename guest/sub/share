@@ -17,7 +17,7 @@ grep -q '^/hostshare' /etc/fstab || sudo sh -c 'echo "
 # qemu share
 /hostshare                                '${_PATH_SHARE}'        9p     noauto,trans=virtio,version=9p2000.L,rw,umask=002    0 0" >> /etc/fstab'
 
-sudo mount ${_PATH_SHARE}
+grep -q ^/hostshare /proc/mounts || sudo mount ${_PATH_SHARE}
 
 # bookmarks
 file=${HOME}/.config/gtk-3.0/bookmarks
