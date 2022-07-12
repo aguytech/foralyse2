@@ -1,34 +1,43 @@
 #!/bin/bash
 
+######################## CONF
+
 _PATH_BASE=$( readlink -f ${0%/*} )
+_PATH_CONF=${HOME}/.config/foralyse
+_PATH_LOG=/var/log/foralyse
+_CMD="sudo apt"
+_CMD_INS="sudo apt install -y"
+_TRACE=info
+_FILE_CONF=${_PATH_CONF}/foralyse
 
-### functions
+[ -f "${_FILE_CONF}" ] || { cp ${_PATH_BASE}/conf/foralyse ${_PATH_CONF}/; }
 
+# functions
 file=${_PATH_BASE}/../inc
 ! [ -f "${file}" ] && echo "Unable to find file: ${file}" && exit 1
 ! . ${file} && echo "Errors while sourcing file: ${file}" && exit 1
 
-### begin
+######################## BEGIN
 
-_echoA "- Use from the GUEST"
+_echoA "- Use from the GUEST with Xubuntu 22.04 jammy already installed"
 
 if [ -z "${_PATH_SHARE}" ]; then
 	anstmp=/foralyse/share
-	_ask "Give the shared path from the Guest (${anstmp}): "
+	_askno "Give the shared path from the Guest (${anstmp})"
 	_PATH_SHARE=${_ANSWER:-${anstmp}}
 	sed -i "/^_PATH_SHARE=/ s|=.*$|=${_PATH_SHARE}|" ${_FILE_CONF}
 fi
 
 if [ -z "${_PATH_CASE}" ]; then
 	anstmp=/foralyse/cases
-	_ask "Give the path to mount cases (${anstmp}): "
+	_askno "Give the path to mount cases (${anstmp})"
 	_PATH_CASE=${_ANSWER:-${anstmp}}
 	sed -i "/^_PATH_CASE=/ s|=.*$|=${_PATH_CASE}|" ${_FILE_CONF}
 fi
 
 if [ -z "${_PATH_NBD}" ]; then
 	anstmp=/foralyse/nbd
-	_ask "Give the path to mount dumped disk (${anstmp}): "
+	_askno "Give the path to mount dumped disk (${anstmp})"
 	_PATH_NBD=${_ANSWER:-${anstmp}}
 	sed -i "/^_PATH_NBD=/ s|=.*$|=${_PATH_NBD}|" ${_FILE_CONF}
 fi
@@ -52,4 +61,4 @@ for part in ${parts}; do
 done
 
 _echoa "\n-----------------------------------------------"
-_echoA "This installation is complete \nRestart the guest"
+_echoA "This installation is done \nRestart the guest"
