@@ -88,6 +88,10 @@ path=gtksourceview-4
 [ -e "${path}" ] || ln -sv gtksourceview-3.0 ${path}
 
 _echot "------  user conf"
+paths=".tmux .wxHexEditor"
+for path in ${paths}; do
+	[ -d "${path}" ] && rm -fR ${path}
+done
 for file in $(ls ${_PATH_BASE}/conf/user.*.tar.gz); do
 	tar xzf ${file} -C ${HOME}/
 done
@@ -112,11 +116,13 @@ done
 
 _echot "------  geany"
 path=${HOME}/.config/geany/colorschemes
+_keepmv ${path}
 [ -d "${path}" ] || mkdir -p ${path}
  cp ${_PATH_BASE}/conf/geany/* ${path}/
 
 _echot "------  bless"
 path=${HOME}/.config/bless/layouts/
+_keepmv ${path}
 [ -d "${path}" ] || mkdir -p ${path}
 cp ${_PATH_BASE}/conf/bless/* ${path}/
 

@@ -21,7 +21,7 @@ file=${_PATH_BASE}/../inc
 
 ######################## BEGIN
 
-_echoA "- Use from the GUEST with Xubuntu 22.04 jammy already installed"
+_echoA "- Use from the GUEST"
 
 if [ -z "${_PATH_SHARE}" ]; then
 	anstmp=/foralyse/share
