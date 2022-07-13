@@ -1,27 +1,6 @@
 #!/bin/bash
 
-### paths
-
-paths="${HOME}/.local/bin ${HOME}/.local/share/icons ${HOME}/.local/share/applications ${HOME}/.config/geany/colorschemes"
-for path in ${paths}; do
-	[ -d "${path}" ] || mkdir -p ${path}
-done
-
-### user
-
-# add ${HOME}/.local/bin to PATH
-[ -f "${HOME}/.profile" ] && . ${HOME}/.profile
-# icons
-cp ${_PATH_BASE}/icons/* ${HOME}/.local/share/icons/
-# geany
-cp ${_PATH_BASE}/conf/geany/* ${HOME}/.config/geany/colorschemes/
-# thunar-volman
-xfconf-query -c thunar-volman -p /autobrowse/enabled -s false
-xfconf-query -c thunar-volman -p /automount-drives/enabled -s false
-xfconf-query -c thunar-volman -p /automount-media/enabled -s false
-
-### upgrade
-
+_echot "------  upgrade"
 ${_CMD} remove -y blueman gimp* libreoffice-* pidgin* thunderbird* transmission-gtk
 ${_CMD} remove -y gnome-sudoku gnome-mines sgt-*
 ${_CMD} update
@@ -29,54 +8,25 @@ ${_CMD} list --upgradable
 ${_CMD} -y dist-upgrade
 ${_CMD} -y autoremove
 
-##### system
-
+_echot "------  system"
 packages="binutils-common bsdmainutils curl debconf-utils exfatprogs genisoimage xsysinfo"
 packages+=" git gnupg2 gparted hfsprogs htop kpartx lnav most net-tools tmux vim"
 packages+=" p7zip-full p7zip-rar pv rar sysstat testdisk tmux tree unrar"
 # openssh-server
 ${_CMD_INS} ${packages}
 
+_echot "------  tools"
 packages="dconf-editor engrampa galculator gpicview meld plank qt5ct qt5-gtk2-platformtheme"
 packages+=" thunar-media-tags-plugin tumbler-plugins-extra xfce4-taskmanager"
 ${_CMD_INS} ${packages}
 
-### python
-
+_echot "------  python3"
 ${_CMD_INS} python3 python3-pip
 #python3 -m pip install -U pip grip
 
+_echot "------  python2"
 ${_CMD_INS} python2 # python2-dev
 cd /tmp
 curl -sSL https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
 python2 get-pip.py
 python2 -m pip install -U pip
-
-### conf
-
-##### global
-
-sudo swapoff -av
-sudo sh -c 'echo vm.swappiness=10 > /etc/sysctl.d/99-swappiness.conf' # limit swap
-sudo swapon -v
-
-sudo rm /etc/localtime && sudo ln -sv /usr/share/zoneinfo/Etc/UTC /etc/localtime
-
-##### QT5
-
-file=/etc/X11/Xsession.d/56xubuntu-session
-[ -f "${file}" ] && sudo sed -i '/export QT_QPA_PLATFORMTHEME=/ s|=.*$|=qt5ct|' ${file}
-export QT_QPA_PLATFORMTHEME=qt5ct # gtk2
-echo -e "\n# QT\nexport QT_QPA_PLATFORMTHEME=qt5ct " >> ${HOME}/.profile
-echo -e "\n#JAVA\nexport _JAVA_OPTIONS=\"-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel \${_JAVA_OPTIONS}\"" >> ${HOME}/.profile
-
-_echoA "After validation, adjust settings for qt5 and close qt5ct window"
-_askno "Validate to continue"
-qt5ct 2>/dev/null
-
-##### plank
-
-cp ${_PATH_BASE}/xtra/plank.desktop ${HOME}/.config/autostart/
-_echoA "After validation, adjust plank preferences and close plank window"
-_askno "Validate to continue"
-plank --preferences &

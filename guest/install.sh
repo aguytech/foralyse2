@@ -2,9 +2,10 @@
 
 ######################## CONF
 
-_TRACE=info
+_TRACE=debug
 _PATH_BASE=$( readlink -f ${0%/*} )
 _PATH_CONF=${HOME}/.config/foralyse
+_PATH_REPO_BS=$( readlink -f ${_PATH_BASE}/../bs )
 _PATH_LOG=/var/log/foralyse
 _CMD="sudo apt"
 _CMD_INS="sudo apt install -y"
@@ -53,8 +54,8 @@ fi
 
 ### sub
 
-parts="share cases nbd global perso"
-parts+=" forensic autopsy binwalk regripper volatility"
+parts="share cases nbd init global conf root perso"
+parts+=" forensic binwalk regripper autopsy volatility"
 parts+=" wireshark idafree bytecode luyten cfr clean"
 # kali pandoc
 for part in ${parts}; do
