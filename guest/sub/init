@@ -11,9 +11,8 @@ sudo adduser ${USER} video
 
 _echot "------  .bash_aliases"
 file=${HOME}/.bash_aliases
-file_from=${_PATH_BS}/conf/.bash_aliases
 _keepmv ${file}
-_eval cp ${file_from} ${file}
+_eval cp ${_PATH_REPO_BS}/conf/.bash_aliases ${file}
 
 _echot "------  .bashrc"
 file=${HOME}/.bashrc
