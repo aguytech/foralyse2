@@ -5,3 +5,6 @@ _PATH_SHARE=
 
 # Path to mount dumped disk file in this guest. All partitions contains by this device file will be mounted under this path.
 _PATH_NBD=
+
+# Wait a confirmation bevore start a new part of installation.
+_HALT=
