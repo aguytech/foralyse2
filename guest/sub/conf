@@ -45,6 +45,15 @@ done
 _echot "------- vim colors"
 _evalr cp ${_PATH_BASE}/conf/vim/* /usr/share/vim/vim*/colors/
 
+_echot "------- vim conf"
+file=/etc/vim/vimrc
+sudo sed -i "s|^\"\(syntax\).*|\1 on|" ${file}
+opts="background=dark showmatch"
+# uncomment
+for opt in ${opts}; do
+	sudo sed -i "s|^\"\(set ${opt}.*\)$|\1|" ${file}
+done
+
 _echot "------- meld style"
 _evalr cp ${_PATH_BASE}/conf/meld-dark.xml /usr/share/meld/styles/
 
@@ -53,10 +62,10 @@ path=/usr/share/icons/Foralyse
 [ -d "${path}" ] || sudo mkdir -p ${path}
 _evalr cp ${_PATH_BASE}/icons/* ${path}/
 
-_echot "------- backdrops"
+_echot "------- wp"
 path=/usr/share/xfce4/backdrops
-[ -d "${path}" ] || sudo mkdir -p ${path}
-sudo cp ${_PATH_BASE}/xtra/wp/* ${path}/
+_evalr cp ${_PATH_BASE}/xtra/wp/* ${path}/
+_evalr chmod 644 ${path}/*
 
 ### USER
 
@@ -71,11 +80,12 @@ xfconf-query -c thunar-volman -p /autobrowse/enabled -s false
 xfconf-query -c thunar-volman -p /automount-drives/enabled -s false
 xfconf-query -c thunar-volman -p /automount-media/enabled -s false
 
-_echot "------- editor"
-files=".nanorc .tmux.conf .vimrc"
-for file in ${files}; do
-	_keepmv "${HOME}/${file}"
-	_eval cp "${_PATH_REPO_BS}/conf/${file}" "${HOME}/${file}"
+_echot "------- ${_PATH_BS} conf links"
+for file in .nanorc .tmux.conf .vimrc; do
+	path_from="${_PATH_REPO_BS}/conf/${file}"
+	path=${HOME}/${file}
+	_keepmv "${path}"
+	ln -s "${path_from}" "${path}"
 done
 
 _echot "------- gtk styles"
@@ -90,7 +100,7 @@ path=gtksourceview-4
 _echot "------- user conf"
 paths=".tmux .wxHexEditor"
 for path in ${paths}; do
-	[ -d "${path}" ] && rm -fR ${path}
+	_keepmv ${path}
 done
 for file in $(ls ${_PATH_BASE}/conf/user.*.tar.gz); do
 	tar xzf ${file} -C ${HOME}/
