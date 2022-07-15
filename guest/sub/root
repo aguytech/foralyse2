@@ -2,9 +2,8 @@
 
 _echot "------- .bash_aliases"
 file=/root/.bash_aliases
-file_from=${_PATH_BS}/conf/.bash_aliases
 _keepmv ${file}
-_evalr ln -s ${file_from} ${file}
+_evalr cp ${_PATH_REPO_BS}/conf/.bash_aliases ${file}
 
 _echot "------- .bashrc"
 file="/root/.bashrc"
@@ -25,6 +24,5 @@ sudo grep -q "/.bash_aliases" ${file} || sudo sh -c "echo '
 
 _echot "------- .vimrc"
 file=/root/.vimrc
-file_from=${_PATH_BS}/conf/.vimrc
 _keepmv ${file}
-_evalr ln -s ${file_from} ${file}
+_evalr cp ${_PATH_REPO_BS}/conf/.vimrc ${file}

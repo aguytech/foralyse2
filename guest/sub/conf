@@ -4,7 +4,7 @@
 
 _echot "------- bin"
 for file in clean-files upgrade; do
-	sudo cp ${_PATH_REPO_BS}/${file} /usr/local/bin/
+	_evalr cp ${_PATH_REPO_BS}/${file} /usr/local/bin/
 done
 
 _echot "------- grub"
@@ -28,9 +28,7 @@ _echot "------- UTC 0"
 sudo rm /etc/localtime && sudo ln -sv /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
 _echot "------- profile"
-sudo sh -c "echo '# PATH
-export PATH=\${PATH}:${_PATH_BS}
-# QT
+sudo sh -c "echo '# QT
 export QT_QPA_PLATFORMTHEME=qt5ct' > /etc/profile.d/desktop.sh"
 
 _echot "------- bash-completion"
@@ -80,12 +78,11 @@ xfconf-query -c thunar-volman -p /autobrowse/enabled -s false
 xfconf-query -c thunar-volman -p /automount-drives/enabled -s false
 xfconf-query -c thunar-volman -p /automount-media/enabled -s false
 
-_echot "------- ${_PATH_BS} conf links"
+_echot "------- user conf"
 for file in .nanorc .tmux.conf .vimrc; do
-	path_from="${_PATH_REPO_BS}/conf/${file}"
 	path=${HOME}/${file}
 	_keepmv "${path}"
-	ln -s "${path_from}" "${path}"
+	_eval cp "${_PATH_REPO_BS}/conf/${file}" "${path}"
 done
 
 _echot "------- gtk styles"
@@ -98,7 +95,7 @@ path=gtksourceview-4
 [ -e "${path}" ] || ln -sv gtksourceview-3.0 ${path}
 
 _echot "------- user conf"
-paths=".tmux .wxHexEditor"
+paths=".tmux .wxHexEditor .java/.userPrefs/us/deathmarine/luyten/"
 for path in ${paths}; do
 	_keepmv ${path}
 done
