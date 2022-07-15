@@ -1,20 +1,20 @@
 #!/bin/bash
 
-_echot "------  root user"
+_echot "------- root user"
 _ask "Give the password for root" && echo -e "${_ANSWER}\n${_ANSWER}" | sudo passwd root
 
-_echot "------  conf user"
+_echot "------- conf user"
 sudo adduser ${USER} users
 sudo adduser ${USER} www-data
 sudo adduser ${USER} audio
 sudo adduser ${USER} video
 
-_echot "------  .bash_aliases"
+_echot "------- .bash_aliases"
 file=${HOME}/.bash_aliases
 _keepmv ${file}
 _eval cp ${_PATH_REPO_BS}/conf/.bash_aliases ${file}
 
-_echot "------  .bashrc"
+_echot "------- .bashrc"
 file=${HOME}/.bashrc
 _keepcp ${file}
 _eval "sed -i 's|^\(HISTSIZE\)=.*$|\1=50000|' ${file}"
@@ -34,7 +34,7 @@ grep -q ". \${HOME}/.bash_aliases" ${file} || echo "
 
 . ${file}
 
-_echot "------  profile"
+_echot "------- profile"
 path=${HOME}/.local/bin
 [ -d "${path}" ] || mkdir -p ${path}
 # add ${HOME}/.local/bin to PATH for pip packages

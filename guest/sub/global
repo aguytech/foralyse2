@@ -1,6 +1,6 @@
 #!/bin/bash
 
-_echot "------  upgrade"
+_echot "------- upgrade"
 ${_CMD} remove -y blueman gimp* libreoffice-* pidgin* thunderbird* transmission-gtk
 ${_CMD} remove -y gnome-sudoku gnome-mines sgt-*
 ${_CMD} update
@@ -8,23 +8,23 @@ ${_CMD} list --upgradable
 ${_CMD} -y dist-upgrade
 ${_CMD} -y autoremove
 
-_echot "------  system"
+_echot "------- system"
 packages="binutils-common bsdmainutils curl debconf-utils exfatprogs genisoimage xsysinfo"
 packages+=" git gnupg2 gparted hfsprogs htop kpartx lnav most net-tools tmux vim"
 packages+=" p7zip-full p7zip-rar pv rar sysstat testdisk tmux tree unrar"
 # openssh-server
 ${_CMD_INS} ${packages}
 
-_echot "------  tools"
+_echot "------- tools"
 packages="dconf-editor engrampa galculator gpicview meld plank qt5ct qt5-gtk2-platformtheme"
 packages+=" thunar-media-tags-plugin tumbler-plugins-extra xfce4-taskmanager"
 ${_CMD_INS} ${packages}
 
-_echot "------  python3"
+_echot "------- python3"
 ${_CMD_INS} python3 python3-pip
 #python3 -m pip install -U pip grip
 
-_echot "------  python2"
+_echot "------- python2"
 ${_CMD_INS} python2 # python2-dev
 cd /tmp
 curl -sSL https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py

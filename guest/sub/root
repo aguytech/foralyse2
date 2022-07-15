@@ -1,12 +1,12 @@
 #!/bin/bash
 
-_echot "------  .bash_aliases"
+_echot "------- .bash_aliases"
 file=/root/.bash_aliases
 file_from=${_PATH_BS}/conf/.bash_aliases
 _keepmv ${file}
 _evalr ln -s ${file_from} ${file}
 
-_echot "------  .bashrc"
+_echot "------- .bashrc"
 file="/root/.bashrc"
 _keepcp ${file}
 
@@ -23,7 +23,7 @@ sudo grep -q "/.bash_aliases" ${file} || sudo sh -c "echo '
 [ -f /root/.bash_aliases ] && . /root/.bash_aliases
 '  >> ${file}"
 
-_echot "------  .vimrc"
+_echot "------- .vimrc"
 file=/root/.vimrc
 file_from=${_PATH_BS}/conf/.vimrc
 _keepmv ${file}
