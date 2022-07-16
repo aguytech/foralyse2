@@ -4,17 +4,18 @@
 
 _TRACE=debug
 _PATH_BASE=$( readlink -f ${0%/*} )
-_PATH_CONF=${HOME}/.config/foralyse
 _PATH_REPO_BS=$( readlink -f ${_PATH_BASE}/../bs )
+_PATH_CONF=${HOME}/.config/foralyse
 _PATH_LOG=/var/log/foralyse
 _CMD="sudo apt"
 _CMD_INS="sudo apt install -y"
 _FILE_CONF=${_PATH_CONF}/foralyse
 
+# _FILE_CONF
 [ -d "${_PATH_CONF}" ] || mkdir -p ${_PATH_CONF}
 [ -f "${_FILE_CONF}" ] || { cp ${_PATH_BASE}/conf/foralyse ${_FILE_CONF}; }
 
-# functions
+# inc
 file=${_PATH_REPO_BS}/inc
 ! [ -f "${file}" ] && echo "Unable to find file: ${file}" && exit 1
 ! . ${file} && echo "Errors while sourcing file: ${file}" && exit 1
@@ -44,9 +45,9 @@ if [ -z "${_PATH_NBD}" ]; then
 	_confset _PATH_NBD "${_PATH_NBD}"
 fi
 
-if [ -z ${_HALT} ]; then
+if [ -z "${_HALT}" ]; then
 	_askyn "Enable halt between each parts?"
-	_HALT=${_ANSWER/n/}
+	_HALT=${_ANSWER}
 	_confset _HALT "${_HALT}"
 fi
 
