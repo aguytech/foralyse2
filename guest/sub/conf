@@ -1,6 +1,6 @@
 #!/bin/bash
 
-### SYSTEM
+########################  SYSTEM
 
 _echot "------- grub"
 file=/etc/default/grub
@@ -22,9 +22,9 @@ sudo swapon -v
 _echot "------- UTC 0"
 sudo rm /etc/localtime && sudo ln -sv /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
-_echot "------- profile"
-sudo sh -c "echo '# QT
-export QT_QPA_PLATFORMTHEME=qt5ct' > /etc/profile.d/desktop.sh"
+_echot "------- QT_QPA_PLATFORMTHEME"
+export QT_QPA_PLATFORMTHEME=qt5ct
+sudo grep 'export QT_QPA_PLATFORMTHEME' /etc -rl|xargs sudo sed -i '/export QT_QPA_PLATFORMTHEME=/ s|=.*$|=qt5ct|'
 
 _echot "------- bash-completion"
 _evalr "cp -a ${_PATH_BASE}/xtra/bash-completion/* /usr/share/bash-completion/completions/"
@@ -60,12 +60,11 @@ path=/usr/share/xfce4/backdrops
 _evalr cp ${_PATH_BASE}/xtra/wp/* ${path}/
 _evalr chmod 644 ${path}/*
 
-### USER
+########################  USER
 
-_echot "------- thunar-volman"
-xfconf-query -c thunar-volman -p /autobrowse/enabled -s false
-xfconf-query -c thunar-volman -p /automount-drives/enabled -s false
-xfconf-query -c thunar-volman -p /automount-media/enabled -s false
+_echot "------- user icons"
+path=${HOME}/.local/share/icons
+_eval cp ${_PATH_BASE}/icons/* ${path}/
 
 _echot "------- user conf"
 for file in .nanorc .tmux.conf .vimrc; do
@@ -73,6 +72,11 @@ for file in .nanorc .tmux.conf .vimrc; do
 	_keepmv "${path}"
 	_eval cp "${_PATH_REPO_BS}/conf/${file}" "${path}"
 done
+
+_echot "------- thunar-volman"
+xfconf-query -c thunar-volman -p /autobrowse/enabled -s false
+xfconf-query -c thunar-volman -p /automount-drives/enabled -s false
+xfconf-query -c thunar-volman -p /automount-media/enabled -s false
 
 _echot "------- gtk styles"
 path=${HOME}/.local/share/gtksourceview-3.0/styles
@@ -84,13 +88,16 @@ path=gtksourceview-4
 [ -e "${path}" ] || ln -sv gtksourceview-3.0 ${path}
 
 _echot "------- user conf"
-paths=".tmux .wxHexEditor .java/.userPrefs/us/deathmarine/luyten/"
+paths=".tmux .wxHexEditor .java/.userPrefs/us/deathmarine/luyten"
 for path in ${paths}; do
 	_keepmv ${path}
 done
 for file in $(ls ${_PATH_BASE}/conf/user.*.tar.gz); do
 	tar xzf ${file} -C ${HOME}/
 done
+
+_echot "------- tmux desktop"
+_eval cp ${_PATH_BASE}/xtra/org.gnome.Terminal-tmux.desktop ${HOME}/.local/share/applications/
 
 _echot "------- nano"
 for str in conf install; do
@@ -122,21 +129,8 @@ _keepmv ${path}
 [ -d "${path}" ] || mkdir -p ${path}
 cp ${_PATH_BASE}/conf/bless/* ${path}/
 
-_echot "------- tmux desktop"
-cp ${_PATH_BASE}/xtra/xfce4-terminal-tmux.desktop ${HOME}/.local/share/applications/
-
-_echot "------- user icons"
-path=${HOME}/.local/share/icons
-cp ${_PATH_BASE}/icons/* ${path}/
-
-_echot "------- 56xubuntu-session"
-file=/etc/X11/Xsession.d/56xubuntu-session
-[ -f "${file}" ] && sudo sed -i '/export QT_QPA_PLATFORMTHEME=/ s|=.*$|=qt5ct|' ${file}
-
-_echot "------- profile"
-export QT_QPA_PLATFORMTHEME=qt5ct # gtk2
-echo -e "\n# QT\nexport QT_QPA_PLATFORMTHEME=qt5ct " >> ${HOME}/.profile
-echo -e "\n#JAVA\nexport _JAVA_OPTIONS=\"-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel \${_JAVA_OPTIONS}\"" >> ${HOME}/.profile
+_echot "------- QT_QPA_PLATFORMTHEME"
+sudo grep 'export QT_QPA_PLATFORMTHEME' /etc -rl|xargs sudo sed -i '/export QT_QPA_PLATFORMTHEME=/ s|=.*$|=qt5ct|'
 
 _echot "------- QT5"
 _echoA "After validation, adjust settings for qt5 and close qt5ct window"
