@@ -67,12 +67,6 @@ _evalr chmod 644 ${path}/*
 
 ### USER
 
-_echot "------- user paths"
-paths="${HOME}/.local/share/icons ${HOME}/.local/share/applications"
-for path in ${paths}; do
-	[ -d "${path}" ] || mkdir -p ${path}
-done
-
 _echot "------- thunar-volman"
 xfconf-query -c thunar-volman -p /autobrowse/enabled -s false
 xfconf-query -c thunar-volman -p /automount-drives/enabled -s false

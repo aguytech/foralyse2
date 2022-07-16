@@ -1,13 +1,17 @@
 #!/bin/bash
 
+########################  SYSTEM
+
+########################  USER
+
 _echot "------- root user"
 _ask "Give the password for root" && echo -e "${_ANSWER}\n${_ANSWER}" | sudo passwd root
 
-_echot "------- conf user"
-sudo adduser ${USER} users
-sudo adduser ${USER} www-data
-sudo adduser ${USER} audio
-sudo adduser ${USER} video
+_echot "------- user paths"
+paths="${HOME}/.local/bin ${HOME}/.local/share/icons ${HOME}/.local/share/applications"
+for path in ${paths}; do
+	[ -d "${path}" ] || mkdir -p ${path}
+done
 
 _echot "------- .bash_aliases"
 file=${HOME}/.bash_aliases
@@ -34,10 +38,14 @@ grep -q ". \${HOME}/.bash_aliases" ${file} || echo "
 # bash_aliases
 [ -f \${HOME}/.bash_aliases ] && . \${HOME}/.bash_aliases"  >> ${file}
 
+_echot "------- .bashrc source"
 . ${file}
 
 _echot "------- profile"
-path=${HOME}/.local/bin
-[ -d "${path}" ] || mkdir -p ${path}
-# add ${HOME}/.local/bin to PATH for pip packages
 [ -f "${HOME}/.profile" ] && . ${HOME}/.profile
+
+_echot "------- conf user"
+sudo adduser ${USER} users
+sudo adduser ${USER} www-data
+sudo adduser ${USER} audio
+sudo adduser ${USER} video
