@@ -2,11 +2,6 @@
 
 ### SYSTEM
 
-_echot "------- bin"
-for file in clean-files upgrade; do
-	_evalr cp ${_PATH_REPO_BS}/${file} /usr/local/bin/
-done
-
 _echot "------- grub"
 file=/etc/default/grub
 _keepcp ${file}
