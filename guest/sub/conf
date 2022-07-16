@@ -140,13 +140,16 @@ _echot "------- user icons"
 path=${HOME}/.local/share/icons
 cp ${_PATH_BASE}/icons/* ${path}/
 
-_echot "------- QT5"
+_echot "------- 56xubuntu-session"
 file=/etc/X11/Xsession.d/56xubuntu-session
 [ -f "${file}" ] && sudo sed -i '/export QT_QPA_PLATFORMTHEME=/ s|=.*$|=qt5ct|' ${file}
+
+_echot "------- profile"
 export QT_QPA_PLATFORMTHEME=qt5ct # gtk2
 echo -e "\n# QT\nexport QT_QPA_PLATFORMTHEME=qt5ct " >> ${HOME}/.profile
 echo -e "\n#JAVA\nexport _JAVA_OPTIONS=\"-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel \${_JAVA_OPTIONS}\"" >> ${HOME}/.profile
 
+_echot "------- QT5"
 _echoA "After validation, adjust settings for qt5 and close qt5ct window"
 _askno "Validate to continue"
 qt5ct 2>/dev/null

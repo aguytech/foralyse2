@@ -21,13 +21,15 @@ _eval "sed -i 's|^\(HISTSIZE\)=.*$|\1=50000|' ${file}"
 _eval "sed -i 's|^\(HISTFILESIZE\)=.*$|\1=50000|' ${file}"
 _eval "sed -i '/^#force_color_prompt/ s|^#||' ${file}"
 
+_echot "------- color prompt"
 sed -i 's|^#\?\(force_color_prompt\).*$|\1=yes|' ${file}
-# PS1
+
+_echot "------- .bashrc PS1"
 color='\\[\\033[01;34m\\]' # '\\[\\033[01;32m\\]'
 sed -i 's|^\(\s*PS1=\).*00m.*$|\1"\${debian_chroot:+(\$debian_chroot)}'${color}'\\u@\\h\\[\\033[00m\\] \\W'${color}'\\$\\[\\033[00m\\] "|' ${file}
 sed -i "/^\s*PS1=.*01;34m/ s|\"|'|g" ${file}
 
-# aliases
+_echot "------- .bashrc aliases"
 grep -q ". \${HOME}/.bash_aliases" ${file} || echo "
 # bash_aliases
 [ -f \${HOME}/.bash_aliases ] && . \${HOME}/.bash_aliases"  >> ${file}
