@@ -15,12 +15,13 @@ sudo sed -i "s|30|2|g" ${file}
 _evalr update-grub
 
 _echot "------- reduce swapiness"
-sudo swapoff -av
+_evalr swapoff -av
 sudo sh -c 'echo vm.swappiness=40 > /etc/sysctl.d/99-swappiness.conf' # limit swap
-sudo swapon -v
+_evalr swapon -v
 
 _echot "------- UTC 0"
-sudo rm /etc/localtime && sudo ln -sv /usr/share/zoneinfo/Etc/UTC /etc/localtime
+_evalr rm /etc/localtime
+_evalr ln -sv /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
 _echot "------- QT_QPA_PLATFORMTHEME"
 export QT_QPA_PLATFORMTHEME=qt5ct
@@ -47,12 +48,30 @@ for opt in ${opts}; do
 	sudo sed -i "s|^\"\(set ${opt}.*\)$|\1|" ${file}
 done
 
+_echot "------- nano"
+for str in conf install; do
+	_evalr cp -a /usr/share/nano/sh.nanorc /usr/share/nano/${str}.nanorc
+	sudo sed -i 's|^\(syntax \).*|\1"'${str}'" "\.'${str}'$"|' /usr/share/nano/${str}.nanorc
+done
+file=/etc/nanorc
+_keepcp ${file}
+sudo sed -i 's|^.*\(set tabsize\).*|\1 4|' ${file}
+sudo sed -i 's|^\(set cut.*\)$|# \1|' ${file}
+sudo sed -i 's|^\(set linenumbers.*\)$|# \1|' ${file}
+sudo sed -i '/^# *include/ s/^# //' ${file}
+# uncomment
+opts="constantshow historylog matchbrackets multibuffer nohelp softwrap " # various
+opts+="errorcolor functioncolor keycolor numbercolor selectedcolor statuscolor stripecolor titlecolor" # color
+for opt in ${opts}; do
+	sudo sed -i "s|^.*\(set $opt .*\)$|\1|"  ${file}
+done
+
 _echot "------- meld style"
 _evalr cp ${_PATH_BASE}/conf/meld-dark.xml /usr/share/meld/styles/
 
 _echot "------- icons"
 path=/usr/share/icons/Foralyse
-[ -d "${path}" ] || sudo mkdir -p ${path}
+[ -d "${path}" ] || _evalr mkdir -p ${path}
 _evalr cp ${_PATH_BASE}/icons/* ${path}/
 
 _echot "------- wp"
@@ -74,18 +93,18 @@ for file in .nanorc .tmux.conf .vimrc; do
 done
 
 _echot "------- thunar-volman"
-xfconf-query -c thunar-volman -p /autobrowse/enabled -s false
-xfconf-query -c thunar-volman -p /automount-drives/enabled -s false
-xfconf-query -c thunar-volman -p /automount-media/enabled -s false
+_eval xfconf-query -c thunar-volman -p /autobrowse/enabled -s false
+_eval xfconf-query -c thunar-volman -p /automount-drives/enabled -s false
+_eval xfconf-query -c thunar-volman -p /automount-media/enabled -s false
 
 _echot "------- gtk styles"
 path=${HOME}/.local/share/gtksourceview-3.0/styles
-[ -d "${path}" ] || mkdir -p ${path}
+[ -d "${path}" ] || _eval mkdir -p ${path}
 _eval cp ${_PATH_BASE}/conf/styles/* ${path}/
 # gtk 4
 cd ${HOME}/.local/share
 path=gtksourceview-4
-[ -e "${path}" ] || ln -sv gtksourceview-3.0 ${path}
+[ -e "${path}" ] || _eval ln -s gtksourceview-3.0 ${path}
 
 _echot "------- user conf"
 paths=".tmux .wxHexEditor .java/.userPrefs/us/deathmarine/luyten"
@@ -93,44 +112,23 @@ for path in ${paths}; do
 	_keepmv ${path}
 done
 for file in $(ls ${_PATH_BASE}/conf/user.*.tar.gz); do
-	tar xzf ${file} -C ${HOME}/
+	_eval tar xzf ${file} -C ${HOME}/
 done
 
 _echot "------- tmux desktop"
 _eval cp ${_PATH_BASE}/xtra/org.gnome.Terminal-tmux.desktop ${HOME}/.local/share/applications/
 
-_echot "------- nano"
-for str in conf install; do
-	_evalr cp -a /usr/share/nano/sh.nanorc /usr/share/nano/${str}.nanorc
-	sudo sed -i 's|^\(syntax \).*|\1"'${str}'" "\.'${str}'$"|' /usr/share/nano/${str}.nanorc
-done
-file=/etc/nanorc
-_keepcp ${file}
-sudo sed -i 's|^.*\(set tabsize\).*|\1 4|' ${file}
-sudo sed -i 's|^\(set cut.*\)$|# \1|' ${file}
-sudo sed -i 's|^\(set linenumbers.*\)$|# \1|' ${file}
-sudo sed -i '/^# *include/ s/^# //' ${file}
-# uncomment
-opts="constantshow historylog matchbrackets multibuffer nohelp softwrap " # various
-opts+="errorcolor functioncolor keycolor numbercolor selectedcolor statuscolor stripecolor titlecolor" # color
-for opt in ${opts}; do
-	sudo sed -i "s|^.*\(set $opt .*\)$|\1|"  ${file}
-done
-
 _echot "------- geany"
 path=${HOME}/.config/geany/colorschemes
 _keepmv ${path}
-[ -d "${path}" ] || mkdir -p ${path}
- cp ${_PATH_BASE}/conf/geany/* ${path}/
+[ -d "${path}" ] || _eval mkdir -p ${path}
+ _eval cp ${_PATH_BASE}/conf/geany/* ${path}/
 
 _echot "------- bless"
 path=${HOME}/.config/bless/layouts/
 _keepmv ${path}
-[ -d "${path}" ] || mkdir -p ${path}
-cp ${_PATH_BASE}/conf/bless/* ${path}/
-
-_echot "------- QT_QPA_PLATFORMTHEME"
-sudo grep 'export QT_QPA_PLATFORMTHEME' /etc -rl|xargs sudo sed -i '/export QT_QPA_PLATFORMTHEME=/ s|=.*$|=qt5ct|'
+[ -d "${path}" ] || _eval mkdir -p ${path}
+_eval cp ${_PATH_BASE}/conf/bless/* ${path}/
 
 _echot "------- QT5"
 _echoA "After validation, adjust settings for qt5 and close qt5ct window"
@@ -139,8 +137,8 @@ qt5ct 2>/dev/null
 
 _echot "------- plank"
 path=${HOME}/.config/autostart
-[ -d "${path}" ] || mkdir -p ${path}
-cp ${_PATH_BASE}/xtra/plank.desktop ${path}/
+[ -d "${path}" ] || _eval mkdir -p ${path}
+_eval cp ${_PATH_BASE}/xtra/plank.desktop ${path}/
 _echoA "After validation, adjust plank preferences and close plank window"
 _askno "Validate to continue"
 plank --preferences &
