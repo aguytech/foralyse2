@@ -18,7 +18,7 @@ The objectives of this project are to provide basic tools in forensic analysis i
     - malware (static analysis)
 
 - A shared path between host and guest (manual mount)
-- A script nbd.sh to mount all partitions of dumped disk ( raw, qcow, qcow2, qed, parallels, vhdx, vmdk, vdi )
+- A script nbd to mount all partitions of dumped disk ( raw, qcow, qcow2, qed, parallels, vhdx, vmdk, vdi )
 - A script mount-cases.sh to automaticaly mounts all founded cases devices
 
 ## Tools
