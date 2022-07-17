@@ -13,8 +13,8 @@ for path in ${paths}; do
 done
 
 # script
-file=${_PATH_REPO_BS}/nbd
-file2=/usr/local/bin/${file##*/}
+file=${_PATH_REPO_BS}/scripts/nbd.sh
+file2=/usr/local/bin/nbd
 ! [ -f "${file}" ] && _exite "Unable to find file: ${file}"
 _evalr cp ${file} ${file2}
 _evalr chmod +x ${file2}
