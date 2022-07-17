@@ -13,7 +13,7 @@ for path in ${paths}; do
 done
 
 # script
-file=${_PATH_BASE}/xtra/nbd.sh
+file=${_PATH_REPO_BS}/nbd
 file2=/usr/local/bin/${file##*/}
 ! [ -f "${file}" ] && _exite "Unable to find file: ${file}"
 _evalr cp ${file} ${file2}
