@@ -20,40 +20,11 @@ file=${_PATH_REPO_BS}/inc
 ! [ -f "${file}" ] && echo "Unable to find file: ${file}" && exit 1
 ! . ${file} && echo "Errors while sourcing file: ${file}" && exit 1
 
-######################## DATA
+######################## PART
 
 _echoA "- Use from the GUEST"
 
-if [ -z "${_PATH_SHARE}" ]; then
-	anstmp=/foralyse/share
-	_askno "Give the shared path from the Guest (${anstmp})"
-	_PATH_SHARE=${_ANSWER:-${anstmp}}
-	_confset _PATH_SHARE "${_PATH_SHARE}"
-fi
-
-if [ -z "${_PATH_CASE}" ]; then
-	anstmp=/foralyse/cases
-	_askno "Give the path to mount cases (${anstmp})"
-	_PATH_CASE=${_ANSWER:-${anstmp}}
-	_confset _PATH_CASE "${_PATH_CASE}"
-fi
-
-if [ -z "${_PATH_NBD}" ]; then
-	anstmp=/foralyse/nbd
-	_askno "Give the path to mount device files (${anstmp})"
-	_PATH_NBD=${_ANSWER:-${anstmp}}
-	_confset _PATH_NBD "${_PATH_NBD}"
-fi
-
-if [ -z "${_HALT}" ]; then
-	_askyn "Enable halt between each parts?"
-	_HALT=${_ANSWER}
-	_confset _HALT "${_HALT}"
-fi
-
-######################## SUB
-
-parts="share cases nbd init global conf root perso"
+parts="data share cases nbd init global conf root perso"
 parts+=" forensic binwalk regripper autopsy volatility"
 parts+=" wireshark idafree bytecode luyten cfr clean"
 # kali pandoc
