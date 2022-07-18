@@ -23,8 +23,12 @@ _echot "------- UTC 0"
 _evalr rm /etc/localtime
 _evalr ln -sv /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
-_echot "------- QT_QPA_PLATFORMTHEME"
+_echot "------- profile"
 export QT_QPA_PLATFORMTHEME=qt5ct
+sudo sh -c "echo '# QT5
+export QT_QPA_PLATFORMTHEME=qt5ct' > /etc/profile.d/desktop.sh"
+
+_echot "------- QT_QPA_PLATFORMTHEME"
 sudo grep 'export QT_QPA_PLATFORMTHEME' /etc -rl|xargs sudo sed -i '/export QT_QPA_PLATFORMTHEME=/ s|=.*$|=qt5ct|'
 
 _echot "------- bash-completion"
